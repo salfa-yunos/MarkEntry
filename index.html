@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 6 Mark Entry — SR Perpindahan Kampong Lambak Kanan</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --accent-glow: rgba(59,130,246,0.15);
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --success: #3fb950;
+    --warning: #d29922;
+    --danger: #f85149;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: ‘Sora’, sans-serif;
+background: var(–bg);
+color: var(–text);
+min-height: 100vh;
+padding: 0;
+}
+
+/* HEADER */
+.header {
+background: var(–surface);
+border-bottom: 1px solid var(–border);
+padding: 16px 20px;
+position: sticky;
+top: 0;
+z-index: 100;
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.header-icon {
+width: 36px; height: 36px;
+background: linear-gradient(135deg, var(–accent), #7c3aed);
+border-radius: 8px;
+display: flex; align-items: center; justify-content: center;
+font-size: 18px; flex-shrink: 0;
+}
+.header-title { font-size: 14px; font-weight: 600; }
+.header-sub { font-size: 11px; color: var(–muted); }
+.header-back {
+margin-left: auto;
+background: var(–surface2);
+border: 1px solid var(–border);
+color: var(–text);
+padding: 7px 14px;
+border-radius: var(–radius-sm);
+font-family: ‘Sora’, sans-serif;
+font-size: 13px;
+cursor: pointer;
+display: flex; align-items: center; gap: 6px;
+transition: all 0.2s;
+}
+.header-back:hover { background: var(–surface2); border-color: var(–accent); color: var(–accent); }
+.header-back:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* BREADCRUMB */
+.breadcrumb {
+display: flex; align-items: center; gap: 8px;
+padding: 14px 20px;
+font-size: 12px; color: var(–muted);
+overflow-x: auto;
+white-space: nowrap;
+}
+.breadcrumb-item { color: var(–muted); }
+.breadcrumb-item.active { color: var(–accent2); font-weight: 600; }
+.breadcrumb-sep { color: var(–border); }
+
+/* MAIN */
+.main { padding: 10px 16px 40px; max-width: 600px; margin: 0 auto; }
+
+/* STEP TITLE */
+.step-title {
+font-size: 20px; font-weight: 700;
+margin-bottom: 6px;
+background: linear-gradient(135deg, var(–text), var(–accent2));
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.step-sub { font-size: 13px; color: var(–muted); margin-bottom: 24px; }
+
+/* SELECTION CARDS */
+.cards-grid { display: flex; flex-direction: column; gap: 10px; }
+.card-btn {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+padding: 16px 18px;
+cursor: pointer;
+transition: all 0.2s;
+display: flex; align-items: center; gap: 14px;
+text-align: left; width: 100%;
+color: var(–text);
+font-family: ‘Sora’, sans-serif;
+}
+.card-btn:hover {
+border-color: var(–accent);
+background: var(–accent-glow);
+transform: translateX(4px);
+}
+.card-btn:active { transform: translateX(2px); }
+.card-icon {
+width: 40px; height: 40px; border-radius: var(–radius-sm);
+display: flex; align-items: center; justify-content: center;
+font-size: 18px; flex-shrink: 0;
+}
+.card-label { font-size: 15px; font-weight: 600; }
+.card-desc { font-size: 12px; color: var(–muted); margin-top: 2px; }
+.card-arrow { margin-left: auto; color: var(–muted); font-size: 16px; }
+
+/* CLASS COLORS */
+.cls-6A .card-icon { background: rgba(59,130,246,0.15); }
+.cls-6B .card-icon { background: rgba(52,211,153,0.15); }
+.cls-6C .card-icon { background: rgba(251,146,60,0.15); }
+
+/* SUBJECT COLORS */
+.subj-BM .card-icon { background: rgba(59,130,246,0.15); }
+.subj-ENG .card-icon { background: rgba(124,58,237,0.15); }
+.subj-SCI .card-icon { background: rgba(52,211,153,0.15); }
+.subj-MTH .card-icon { background: rgba(251,146,60,0.15); }
+.subj-MCT .card-icon { background: rgba(239,68,68,0.15); }
+.subj-MIB .card-icon { background: rgba(234,179,8,0.15); }
+
+/* BADGE */
+.badge {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 10px;
+padding: 2px 7px;
+border-radius: 20px;
+font-weight: 600;
+}
+.badge-blue { background: rgba(59,130,246,0.2); color: var(–accent2); border: 1px solid rgba(59,130,246,0.3); }
+.badge-green { background: rgba(63,185,80,0.2); color: var(–success); border: 1px solid rgba(63,185,80,0.3); }
+
+/* MARK ENTRY */
+.entry-header {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+padding: 14px 16px;
+margin-bottom: 16px;
+display: flex; align-items: center; gap: 10px;
+}
+.entry-header-info .label { font-size: 11px; color: var(–muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.entry-header-info .value { font-size: 14px; font-weight: 600; }
+
+.papers-container { display: flex; flex-direction: column; gap: 20px; }
+
+.paper-section {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+overflow: hidden;
+}
+.paper-header {
+padding: 12px 16px;
+background: var(–surface2);
+border-bottom: 1px solid var(–border);
+display: flex; align-items: center; justify-content: space-between;
+}
+.paper-name { font-size: 13px; font-weight: 600; }
+.paper-max { font-family: ‘JetBrains Mono’, monospace; font-size: 12px; color: var(–muted); }
+
+.student-row {
+display: flex; align-items: center;
+padding: 10px 16px;
+border-bottom: 1px solid rgba(48,54,61,0.5);
+gap: 12px;
+transition: background 0.15s;
+}
+.student-row:last-child { border-bottom: none; }
+.student-row:hover { background: rgba(48,54,61,0.3); }
+
+.student-num {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 11px;
+color: var(–muted);
+min-width: 22px;
+text-align: center;
+}
+.student-name {
+font-size: 13px;
+flex: 1;
+line-height: 1.3;
+}
+.mark-input {
+width: 64px;
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: var(–radius-sm);
+color: var(–text);
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 14px;
+font-weight: 600;
+text-align: center;
+padding: 6px 4px;
+transition: all 0.2s;
+-moz-appearance: textfield;
+}
+.mark-input::-webkit-inner-spin-button,
+.mark-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.mark-input:focus {
+outline: none;
+border-color: var(–accent);
+background: var(–accent-glow);
+box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+}
+.mark-input.over { border-color: var(–danger); background: rgba(248,81,73,0.1); }
+.mark-input.filled { border-color: var(–success); }
+
+/* PROGRESS BAR */
+.progress-wrap {
+margin-bottom: 16px;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+padding: 12px 16px;
+}
+.progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; color: var(–muted); }
+.progress-bar-bg {
+height: 6px; border-radius: 3px;
+background: var(–border);
+overflow: hidden;
+}
+.progress-bar-fill {
+height: 100%; border-radius: 3px;
+background: linear-gradient(90deg, var(–accent), #7c3aed);
+transition: width 0.3s ease;
+}
+
+/* FOOTER ACTIONS */
+.footer-actions {
+position: fixed; bottom: 0; left: 0; right: 0;
+background: var(–surface);
+border-top: 1px solid var(–border);
+padding: 12px 16px;
+display: flex; gap: 10px;
+max-width: 600px; margin: 0 auto;
+}
+.btn {
+flex: 1; padding: 13px;
+border-radius: var(–radius);
+font-family: ‘Sora’, sans-serif;
+font-size: 14px; font-weight: 600;
+cursor: pointer;
+border: none;
+transition: all 0.2s;
+display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.btn-primary {
+background: var(–accent);
+color: white;
+}
+.btn-primary:hover { background: #2563eb; }
+.btn-secondary {
+background: var(–surface2);
+border: 1px solid var(–border);
+color: var(–text);
+}
+.btn-secondary:hover { border-color: var(–accent); }
+.btn-success {
+background: var(–success);
+color: white;
+}
+.btn-success:hover { background: #2ea043; }
+
+/* SUMMARY PAGE */
+.summary-table {
+width: 100%;
+border-collapse: collapse;
+font-size: 12px;
+margin-top: 12px;
+}
+.summary-table th {
+background: var(–surface2);
+padding: 8px 10px;
+text-align: left;
+font-size: 11px;
+color: var(–muted);
+text-transform: uppercase;
+letter-spacing: 0.5px;
+border: 1px solid var(–border);
+}
+.summary-table td {
+padding: 7px 10px;
+border: 1px solid var(–border);
+font-family: ‘JetBrains Mono’, monospace;
+}
+.summary-table tr:hover td { background: rgba(48,54,61,0.3); }
+.summary-name { font-family: ‘Sora’, sans-serif; font-size: 12px; }
+
+.summary-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: var(–radius);
+margin-bottom: 16px;
+overflow: hidden;
+}
+.summary-card-header {
+padding: 12px 16px;
+background: var(–surface2);
+border-bottom: 1px solid var(–border);
+font-size: 13px; font-weight: 600;
+display: flex; align-items: center; gap: 8px;
+}
+
+.export-area {
+margin-bottom: 80px;
+}
+
+.toast {
+position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+background: var(–success);
+color: white;
+padding: 10px 20px;
+border-radius: 20px;
+font-size: 13px; font-weight: 600;
+z-index: 999;
+opacity: 0;
+transition: opacity 0.3s;
+pointer-events: none;
+white-space: nowrap;
+}
+.toast.show { opacity: 1; }
+
+/* PAGE TRANSITIONS */
+.page { display: none; animation: fadeIn 0.25s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.pb-80 { padding-bottom: 80px; }
+.mt-12 { margin-top: 12px; }
+.divider { height: 1px; background: var(–border); margin: 16px 0; }
+
+/* EXISTING DATA INDICATOR */
+.has-data { position: relative; }
+.has-data::after {
+content: ‘’;
+position: absolute; top: 12px; right: 12px;
+width: 8px; height: 8px;
+border-radius: 50%;
+background: var(–success);
+}
+
+@media (max-width: 400px) {
+.student-name { font-size: 11px; }
+.mark-input { width: 56px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+  <div class="header-icon">📝</div>
+  <div>
+    <div class="header-title">Year 6 Mark Entry</div>
+    <div class="header-sub">SR Perpindahan Kampong Lambak Kanan</div>
+  </div>
+  <button class="header-back" id="backBtn" onclick="goBack()" disabled>← Back</button>
+</div>
+
+<!-- BREADCRUMB -->
+
+<div class="breadcrumb" id="breadcrumb">
+  <span class="breadcrumb-item active">Select Class</span>
+</div>
+
+<!-- MAIN CONTENT -->
+
+<div class="main">
+
+  <!-- PAGE 1: SELECT CLASS -->
+
+  <div class="page active" id="page-class">
+    <div class="step-title">Select Class</div>
+    <div class="step-sub">Choose the class you want to enter marks for</div>
+    <div class="cards-grid">
+      <button class="card-btn cls-6A" onclick="selectClass('6A')">
+        <div class="card-icon">🔵</div>
+        <div>
+          <div class="card-label">Class 6A</div>
+          <div class="card-desc">17 students</div>
+        </div>
+        <span class="card-arrow" id="ind-6A">›</span>
+      </button>
+      <button class="card-btn cls-6B" onclick="selectClass('6B')">
+        <div class="card-icon">🟢</div>
+        <div>
+          <div class="card-label">Class 6B</div>
+          <div class="card-desc">19 students</div>
+        </div>
+        <span class="card-arrow" id="ind-6B">›</span>
+      </button>
+      <button class="card-btn cls-6C" onclick="selectClass('6C')">
+        <div class="card-icon">🟠</div>
+        <div>
+          <div class="card-label">Class 6C</div>
+          <div class="card-desc">19 students</div>
+        </div>
+        <span class="card-arrow" id="ind-6C">›</span>
+      </button>
+    </div>
+
+```
+<div class="divider"></div>
+<button class="btn btn-success" onclick="showSummary()" style="width:100%;margin-top:4px;">
+  📊 View Summary & Export Excel
+</button>
+```
+
+  </div>
+
+  <!-- PAGE 2: SELECT SUBJECT -->
+
+  <div class="page" id="page-subject">
+    <div class="step-title" id="subj-title">Select Subject</div>
+    <div class="step-sub" id="subj-sub">Choose which subject to enter marks for</div>
+    <div class="cards-grid" id="subject-cards"></div>
+  </div>
+
+  <!-- PAGE 3: ENTER MARKS -->
+
+  <div class="page pb-80" id="page-marks">
+    <div class="entry-header">
+      <div style="font-size:24px" id="marks-icon">📚</div>
+      <div class="entry-header-info">
+        <div class="label">Class / Subject</div>
+        <div class="value" id="marks-heading">6A — BM</div>
+      </div>
+      <div id="marks-badge"></div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span>Entries completed</span>
+        <span id="prog-count">0 / 0</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="prog-bar" style="width:0%"></div>
+      </div>
+    </div>
+    <div id="papers-area" class="papers-container"></div>
+  </div>
+
+  <!-- PAGE 4: SUMMARY -->
+
+  <div class="page pb-80" id="page-summary">
+    <div class="step-title">Summary & Export</div>
+    <div class="step-sub">Review all entered marks before downloading</div>
+    <div class="export-area" id="summary-content"></div>
+  </div>
+
+</div>
+
+<!-- FOOTER for marks page -->
+
+<div class="footer-actions" id="footer-marks" style="display:none;">
+  <button class="btn btn-secondary" onclick="goBack()">← Back</button>
+  <button class="btn btn-primary" onclick="saveAndChooseAnother()">✓ Save & Choose Another Subject</button>
+</div>
+
+<!-- FOOTER for summary page -->
+
+<div class="footer-actions" id="footer-summary" style="display:none;">
+  <button class="btn btn-secondary" onclick="goBack()">← Back</button>
+  <button class="btn btn-success" onclick="exportExcel()">⬇ Download Excel</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===================== DATA =====================
+const STUDENTS = {
+  '6A': [
+    'Abdul Ammar Mustaqim Bin Mohammad Sumerdi',
+    'Mohd Aliff Arsraff Bin Abdullah @ Adrian Safrin',
+    'Mohammad Qawwiyun Harith Fardius Bin Abdullah',
+    'Muhammad Al-Irfan Billah Bin Muhammad Al-Muhtadee Billah',
+    "Muhammad 'Aqil Warith Bin Aimi / Muhammad Arfa",
+    'Muhammad Muqri Kasyfi Bin Tasyrif',
+    'Muhammad Muzaffar Azka Bin Abu Bakar',
+    'Muhammad Raif Anaqie Bin Mohammad Anwar',
+    'Alya Bazielah Binti Seruddin @ Hamiezah',
+    'Nuraqillah Rahimah Binti Mohammad Fadillah',
+    'Nurliyana Qaisara Binti Lutfi',
+    'Nur Afifah Firzanah Binti Mohammad Fadilah',
+    'Nur Ardania Ain Binti Mohammed Mohini',
+    'Nur-Afrina Rania Binti Rafian',
+    'Nur Jumyanah Binti Mohiddin',
+    'Nurqalesya Damia Sara Binti Rahimi',
+    'Syahira Musfirah Binti Muhammad Morsidi'
+  ],
+  '6B': [
+    'Ak Wan Mohd Farizz Naufal Bin Pg Abd Muiz',
+    'Mohammad Azahar Izam Iman Bin Adirahiman Shah',
+    'Mohammad Riezman Qusyairi Bin Noor Azman',
+    'Mohammad Shah Rayyan Hibatullah Bin Md Shah Izzudin',
+    'Muhammad Adam Asyraf Bin Muhammad Rusyduddin',
+    'Muhammad Ahza Wafri Bin Awang Mahamad Miadi @ Muhd Jazli',
+    'Muhammad Ali Aqil Akmal Bin Abdullah',
+    'Muhd Faiq Zakwan Bin Bakir',
+    'Md Rizal Fikri Bin Rudi',
+    'Zafrul Izz Nazhan Bin Haji Zamri',
+    'Alya Darwisyah Batrisyia Binti Mohd Nazmi',
+    'Nurhalimatul Hafizah Binti Awang Haji Abdul Rahman',
+    'Nur Amirah Zafirah Binti Awang Ahmad Syihan',
+    'Nur Aina Farhanah Binti Khairul / Fairuz',
+    'Nur Qalesya Az-Zahra Binti Nur Azieman',
+    'Nurul Maisarah Humairah Binti Awang Mohamad Jair',
+    'Raisha Qaisarah Binti Sujairi',
+    'Sarah Sofea Binti Rusli',
+    'Siti Nurfarwizah Humaira Binti Ahmad Fadzilah @ Nur Zahrah'
+  ],
+  '6C': [
+    "Abdul 'Afi Bin Abdullah",
+    'Ak Mohammad Fahmi Muttaqin Bin Pg Abd Rahman',
+    'Ahmad Amirullah Bin Mohammad Saiful',
+    'Mohammad Ahmad Mustakiim Bin Mohammad Nor Azmi',
+    'Mohamad Aqil Zafran Bin Mohamad Fikri',
+    'Mohammad Azhad Shah Bin Nuhairi',
+    'Muhammad Khairul Azam Bin Awang Omar',
+    'Muhd Zarfan Naufail Bin Abdullah',
+    'Nur Al-Qhazieriza Bin Abdullah',
+    'Dk Nurdaimah Rizkiyah Binti Pengiran Mohammed Norfadillah',
+    'Dk Nurhazeeqah Binti Pg Hj Asmalin',
+    'Dayangku Siti Syuhaidah Binti Pengiran Norzalani',
+    'Khayla Radella Binti Md Ali Asrinizal',
+    'Nur Ain Adawiyah Binti Mohammad Aiman',
+    'Nurira Alya Nabilah Binti Mohammad Hairulerdie',
+    'Nurnikmattul Farwizah Binti Mohammad Yurizan',
+    'Nur Rizqah Humaira Binti Johari',
+    'Uzma Zakirah Binti Saifulilham',
+    'Nurul Mushahirah Nadhirah Binti Mohamad Radzuan'
+  ]
+};
+
+const SUBJECTS = [
+  {
+    id: 'BM', label: 'Bahasa Melayu', icon: '🇧🇳', color: 'subj-BM',
+    papers: [
+      { name: 'Paper 1', max: 50 },
+      { name: 'Paper 2', max: 100 }
+    ]
+  },
+  {
+    id: 'ENG', label: 'English', icon: '🇬🇧', color: 'subj-ENG',
+    papers: [
+      { name: 'Paper 1', max: 50 },
+      { name: 'Paper 2', max: 50 }
+    ]
+  },
+  {
+    id: 'SCI', label: 'Science', icon: '🔬', color: 'subj-SCI',
+    papers: [
+      { name: 'Paper 1', max: 30 },
+      { name: 'Paper 2', max: 70 }
+    ]
+  },
+  {
+    id: 'MTH', label: 'Mathematics', icon: '🔢', color: 'subj-MTH',
+    papers: [
+      { name: 'MCT', max: 30 },
+      { name: 'Paper 1', max: 90 },
+      { name: 'Paper 2', max: 90 }
+    ]
+  },
+  {
+    id: 'MCT', label: 'MCT', icon: '📖', color: 'subj-MCT',
+    papers: [
+      { name: 'Paper 1', max: 50 },
+      { name: 'Paper 2', max: 50 }
+    ]
+  },
+  {
+    id: 'MIB', label: 'MIB', icon: '☪️', color: 'subj-MIB',
+    papers: [
+      { name: 'Paper 1', max: 100 }
+    ]
+  }
+];
+
+// ===================== STATE =====================
+let currentClass = null;
+let currentSubject = null;
+let currentPage = 'class';
+let pageStack = ['class'];
+
+// marks[class][subject][paperIdx][studentIdx] = value
+const marks = {};
+['6A','6B','6C'].forEach(c => {
+  marks[c] = {};
+  SUBJECTS.forEach(s => {
+    marks[c][s.id] = s.papers.map(() => Array(STUDENTS[c].length).fill(''));
+  });
+});
+
+// ===================== NAVIGATION =====================
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('footer-marks').style.display = id === 'marks' ? 'flex' : 'none';
+  document.getElementById('footer-summary').style.display = id === 'summary' ? 'flex' : 'none';
+  document.getElementById('backBtn').disabled = pageStack.length <= 1;
+  currentPage = id;
+}
+
+function goBack() {
+  if (pageStack.length <= 1) return;
+  pageStack.pop();
+  const prev = pageStack[pageStack.length - 1];
+  if (prev === 'class') { renderClassPage(); showPage('class'); updateBreadcrumb(); }
+  else if (prev === 'subject') { renderSubjectPage(); showPage('subject'); updateBreadcrumb(); }
+  document.getElementById('backBtn').disabled = pageStack.length <= 1;
+}
+
+function updateBreadcrumb() {
+  const bc = document.getElementById('breadcrumb');
+  let html = '<span class="breadcrumb-item ' + (currentPage==='class'?'active':'') + '">Select Class</span>';
+  if (currentClass) {
+    html += '<span class="breadcrumb-sep">›</span>';
+    html += '<span class="breadcrumb-item ' + (currentPage==='subject'?'active':'') + '">' + currentClass + '</span>';
+  }
+  if (currentSubject) {
+    const s = SUBJECTS.find(x => x.id === currentSubject);
+    html += '<span class="breadcrumb-sep">›</span>';
+    html += '<span class="breadcrumb-item active">' + s.label + '</span>';
+  }
+  bc.innerHTML = html;
+}
+
+// ===================== CLASS PAGE =====================
+function renderClassPage() {
+  currentSubject = null;
+  ['6A','6B','6C'].forEach(c => {
+    const ind = document.getElementById('ind-' + c);
+    const hasAny = SUBJECTS.some(s => marks[c][s.id].some(paper => paper.some(v => v !== '')));
+    if (hasAny) ind.innerHTML = '✓';
+    else ind.innerHTML = '›';
+  });
+}
+
+function selectClass(cls) {
+  currentClass = cls;
+  pageStack = ['class', 'subject'];
+  renderSubjectPage();
+  showPage('subject');
+  updateBreadcrumb();
+}
+
+// ===================== SUBJECT PAGE =====================
+function renderSubjectPage() {
+  document.getElementById('subj-title').textContent = 'Select Subject — ' + currentClass;
+  document.getElementById('subj-sub').textContent = 'Choose which subject to enter marks for';
+
+  const grid = document.getElementById('subject-cards');
+  grid.innerHTML = SUBJECTS.map(s => {
+    const paperMarks = marks[currentClass][s.id];
+    const total = paperMarks.reduce((a,p) => a + p.filter(v=>v!=='').length, 0);
+    const maxTotal = s.papers.length * STUDENTS[currentClass].length;
+    const complete = total === maxTotal && maxTotal > 0;
+    const partial = total > 0 && !complete;
+    const statusBadge = complete
+      ? '<span class="badge badge-green">✓ Complete</span>'
+      : partial
+        ? `<span class="badge badge-blue">${total}/${maxTotal}</span>`
+        : '';
+    return `
+      <button class="card-btn ${s.color}" onclick="selectSubject('${s.id}')">
+        <div class="card-icon">${s.icon}</div>
+        <div>
+          <div class="card-label">${s.label}</div>
+          <div class="card-desc">${s.papers.map(p=>p.name+' (max '+p.max+')').join(', ')}</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">${statusBadge}<span style="color:var(--muted);font-size:16px">›</span></div>
+      </button>`;
+  }).join('');
+}
+
+function selectSubject(subjId) {
+  currentSubject = subjId;
+  pageStack.push('marks');
+  renderMarksPage();
+  showPage('marks');
+  updateBreadcrumb();
+}
+
+// ===================== MARKS PAGE =====================
+function renderMarksPage() {
+  const subj = SUBJECTS.find(s => s.id === currentSubject);
+  const students = STUDENTS[currentClass];
+  document.getElementById('marks-icon').textContent = subj.icon;
+  document.getElementById('marks-heading').textContent = currentClass + ' — ' + subj.label;
+
+  const area = document.getElementById('papers-area');
+  area.innerHTML = subj.papers.map((paper, pi) => {
+    const rows = students.map((name, si) => {
+      const val = marks[currentClass][currentSubject][pi][si];
+      return `
+        <div class="student-row">
+          <span class="student-num">${si+1}</span>
+          <span class="student-name">${name}</span>
+          <input type="number" class="mark-input" 
+            id="inp-${pi}-${si}"
+            min="0" max="${paper.max}" 
+            value="${val}"
+            placeholder="—"
+            oninput="onMarkInput(${pi},${si},${paper.max},this)"
+            onkeydown="handleKeydown(event,${pi},${si},${students.length},${subj.papers.length})"
+          >
+        </div>`;
+    }).join('');
+    return `
+      <div class="paper-section">
+        <div class="paper-header">
+          <span class="paper-name">${paper.name}</span>
+          <span class="paper-max">Max: ${paper.max}</span>
+        </div>
+        ${rows}
+      </div>`;
+  }).join('');
+
+  updateProgress();
+}
+
+function onMarkInput(pi, si, max, el) {
+  const val = el.value.trim();
+  if (val === '') {
+    marks[currentClass][currentSubject][pi][si] = '';
+    el.classList.remove('over','filled');
+  } else {
+    const num = parseFloat(val);
+    marks[currentClass][currentSubject][pi][si] = val;
+    if (num > max) el.classList.add('over');
+    else el.classList.remove('over');
+    if (val !== '') el.classList.add('filled');
+    else el.classList.remove('filled');
+  }
+  updateProgress();
+}
+
+function handleKeydown(e, pi, si, totalStudents, totalPapers) {
+  if (e.key === 'Enter' || e.key === 'ArrowDown') {
+    e.preventDefault();
+    // Move to next student in same paper
+    if (si + 1 < totalStudents) {
+      const next = document.getElementById(`inp-${pi}-${si+1}`);
+      if (next) next.focus();
+    } else if (pi + 1 < totalPapers) {
+      // Move to first student of next paper
+      const next = document.getElementById(`inp-${pi+1}-0`);
+      if (next) next.focus();
+    }
+  }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (si - 1 >= 0) {
+      const prev = document.getElementById(`inp-${pi}-${si-1}`);
+      if (prev) prev.focus();
+    }
+  }
+}
+
+function updateProgress() {
+  const subj = SUBJECTS.find(s => s.id === currentSubject);
+  const students = STUDENTS[currentClass];
+  const allMarks = marks[currentClass][currentSubject];
+  const total = allMarks.reduce((a,p) => a + p.filter(v=>v!=='').length, 0);
+  const maxTotal = subj.papers.length * students.length;
+  document.getElementById('prog-count').textContent = total + ' / ' + maxTotal;
+  document.getElementById('prog-bar').style.width = (maxTotal > 0 ? (total/maxTotal*100) : 0) + '%';
+}
+
+function saveAndChooseAnother() {
+  // Just go back to subject selection (marks are already stored in memory)
+  pageStack = ['class', 'subject'];
+  currentSubject = null;
+  renderSubjectPage();
+  showPage('subject');
+  updateBreadcrumb();
+  showToast('Marks saved! Choose another subject.');
+}
+
+// ===================== SUMMARY =====================
+function showSummary() {
+  pageStack = ['class', 'summary'];
+  currentClass = null;
+  currentSubject = null;
+  renderSummary();
+  showPage('summary');
+  updateBreadcrumb();
+  document.getElementById('backBtn').disabled = false;
+}
+
+function renderSummary() {
+  const content = document.getElementById('summary-content');
+  let html = '';
+  
+  ['6A','6B','6C'].forEach(cls => {
+    SUBJECTS.forEach(subj => {
+      const paperMarks = marks[cls][subj.id];
+      const total = paperMarks.reduce((a,p) => a + p.filter(v=>v!=='').length, 0);
+      if (total === 0) return;
+
+      const students = STUDENTS[cls];
+      html += `
+        <div class="summary-card">
+          <div class="summary-card-header">
+            ${subj.icon} ${cls} — ${subj.label}
+            <span class="badge badge-blue" style="margin-left:auto">${total} entries</span>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="summary-table">
+              <thead><tr>
+                <th>#</th>
+                <th>Name</th>
+                ${subj.papers.map(p=>`<th>${p.name}<br><span style="font-weight:400">(/${p.max})</span></th>`).join('')}
+              </tr></thead>
+              <tbody>
+                ${students.map((name, si) => `
+                  <tr>
+                    <td>${si+1}</td>
+                    <td class="summary-name">${name}</td>
+                    ${subj.papers.map((_,pi) => {
+                      const v = marks[cls][subj.id][pi][si];
+                      return `<td>${v !== '' ? v : '<span style="color:var(--muted)">—</span>'}</td>`;
+                    }).join('')}
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>`;
+    });
+  });
+
+  if (!html) html = '<div style="text-align:center;padding:40px;color:var(--muted);">No marks entered yet.<br>Go back and start entering marks.</div>';
+  content.innerHTML = html;
+}
+
+// ===================== EXCEL EXPORT =====================
+function exportExcel() {
+  const wb = XLSX.utils.book_new();
+
+  ['6A','6B','6C'].forEach(cls => {
+    SUBJECTS.forEach(subj => {
+      const students = STUDENTS[cls];
+      const sheetName = cls + ' ' + subj.id;
+
+      // Build header row
+      const headers = ['No.', 'Student Name', ...subj.papers.map(p => p.name + ' (/' + p.max + ')')];
+      const rows = [headers];
+
+      students.forEach((name, si) => {
+        const row = [si + 1, name];
+        subj.papers.forEach((_, pi) => {
+          const v = marks[cls][subj.id][pi][si];
+          row.push(v !== '' ? parseFloat(v) : '');
+        });
+        rows.push(row);
+      });
+
+      // Max marks row
+      const maxRow = ['', 'MAX MARKS', ...subj.papers.map(p => p.max)];
+      rows.splice(1, 0, maxRow);
+
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+
+      // Column widths
+      ws['!cols'] = [
+        {wch: 4},
+        {wch: 44},
+        ...subj.papers.map(() => ({wch: 14}))
+      ];
+
+      XLSX.utils.book_append_sheet(wb, ws, sheetName);
+    });
+  });
+
+  // Overview sheet
+  const overviewRows = [['Class', 'Subject', 'Paper', 'Students With Marks', 'Total Students']];
+  ['6A','6B','6C'].forEach(cls => {
+    SUBJECTS.forEach(subj => {
+      subj.papers.forEach((paper, pi) => {
+        const filled = marks[cls][subj.id][pi].filter(v => v !== '').length;
+        overviewRows.push([cls, subj.label, paper.name, filled, STUDENTS[cls].length]);
+      });
+    });
+  });
+  const wsOverview = XLSX.utils.aoa_to_sheet(overviewRows);
+  wsOverview['!cols'] = [{wch:8},{wch:18},{wch:12},{wch:20},{wch:16}];
+  XLSX.utils.book_append_sheet(wb, wsOverview, 'Overview');
+
+  XLSX.utils.book_set_props(wb, { Title: 'Year 6 Marks', Author: 'SR Perpindahan Kampong Lambak Kanan' });
+
+  const date = new Date();
+  const stamp = date.getFullYear() + ('0'+(date.getMonth()+1)).slice(-2) + ('0'+date.getDate()).slice(-2);
+  XLSX.writeFile(wb, 'Year6_Marks_' + stamp + '.xlsx');
+  showToast('Excel file downloaded!');
+}
+
+// ===================== TOAST =====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ===================== INIT =====================
+renderClassPage();
+</script>
+
+</body>
+</html>
