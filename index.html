@@ -35,7 +35,6 @@ min-height: 100vh;
 padding: 0;
 }
 
-/* HEADER */
 .header {
 background: var(–surface);
 border-bottom: 1px solid var(–border);
@@ -72,7 +71,6 @@ transition: all 0.2s;
 .header-back:hover { background: var(–surface2); border-color: var(–accent); color: var(–accent); }
 .header-back:disabled { opacity: 0.3; cursor: not-allowed; }
 
-/* BREADCRUMB */
 .breadcrumb {
 display: flex; align-items: center; gap: 8px;
 padding: 14px 20px;
@@ -84,10 +82,8 @@ white-space: nowrap;
 .breadcrumb-item.active { color: var(–accent2); font-weight: 600; }
 .breadcrumb-sep { color: var(–border); }
 
-/* MAIN */
 .main { padding: 10px 16px 40px; max-width: 600px; margin: 0 auto; }
 
-/* STEP TITLE */
 .step-title {
 font-size: 20px; font-weight: 700;
 margin-bottom: 6px;
@@ -96,7 +92,6 @@ background: linear-gradient(135deg, var(–text), var(–accent2));
 }
 .step-sub { font-size: 13px; color: var(–muted); margin-bottom: 24px; }
 
-/* SELECTION CARDS */
 .cards-grid { display: flex; flex-direction: column; gap: 10px; }
 .card-btn {
 background: var(–surface);
@@ -125,20 +120,16 @@ font-size: 18px; flex-shrink: 0;
 .card-desc { font-size: 12px; color: var(–muted); margin-top: 2px; }
 .card-arrow { margin-left: auto; color: var(–muted); font-size: 16px; }
 
-/* CLASS COLORS */
 .cls-6A .card-icon { background: rgba(59,130,246,0.15); }
 .cls-6B .card-icon { background: rgba(52,211,153,0.15); }
 .cls-6C .card-icon { background: rgba(251,146,60,0.15); }
 
-/* SUBJECT COLORS */
 .subj-BM .card-icon { background: rgba(59,130,246,0.15); }
 .subj-ENG .card-icon { background: rgba(124,58,237,0.15); }
 .subj-SCI .card-icon { background: rgba(52,211,153,0.15); }
 .subj-MTH .card-icon { background: rgba(251,146,60,0.15); }
-.subj-MCT .card-icon { background: rgba(239,68,68,0.15); }
 .subj-MIB .card-icon { background: rgba(234,179,8,0.15); }
 
-/* BADGE */
 .badge {
 font-family: ‘JetBrains Mono’, monospace;
 font-size: 10px;
@@ -149,7 +140,6 @@ font-weight: 600;
 .badge-blue { background: rgba(59,130,246,0.2); color: var(–accent2); border: 1px solid rgba(59,130,246,0.3); }
 .badge-green { background: rgba(63,185,80,0.2); color: var(–success); border: 1px solid rgba(63,185,80,0.3); }
 
-/* MARK ENTRY */
 .entry-header {
 background: var(–surface);
 border: 1px solid var(–border);
@@ -225,7 +215,6 @@ box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
 .mark-input.over { border-color: var(–danger); background: rgba(248,81,73,0.1); }
 .mark-input.filled { border-color: var(–success); }
 
-/* PROGRESS BAR */
 .progress-wrap {
 margin-bottom: 16px;
 background: var(–surface);
@@ -245,7 +234,6 @@ background: linear-gradient(90deg, var(–accent), #7c3aed);
 transition: width 0.3s ease;
 }
 
-/* FOOTER ACTIONS */
 .footer-actions {
 position: fixed; bottom: 0; left: 0; right: 0;
 background: var(–surface);
@@ -264,24 +252,13 @@ border: none;
 transition: all 0.2s;
 display: flex; align-items: center; justify-content: center; gap: 6px;
 }
-.btn-primary {
-background: var(–accent);
-color: white;
-}
+.btn-primary { background: var(–accent); color: white; }
 .btn-primary:hover { background: #2563eb; }
-.btn-secondary {
-background: var(–surface2);
-border: 1px solid var(–border);
-color: var(–text);
-}
+.btn-secondary { background: var(–surface2); border: 1px solid var(–border); color: var(–text); }
 .btn-secondary:hover { border-color: var(–accent); }
-.btn-success {
-background: var(–success);
-color: white;
-}
+.btn-success { background: var(–success); color: white; }
 .btn-success:hover { background: #2ea043; }
 
-/* SUMMARY PAGE */
 .summary-table {
 width: 100%;
 border-collapse: collapse;
@@ -321,9 +298,7 @@ font-size: 13px; font-weight: 600;
 display: flex; align-items: center; gap: 8px;
 }
 
-.export-area {
-margin-bottom: 80px;
-}
+.export-area { margin-bottom: 80px; }
 
 .toast {
 position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
@@ -340,7 +315,6 @@ white-space: nowrap;
 }
 .toast.show { opacity: 1; }
 
-/* PAGE TRANSITIONS */
 .page { display: none; animation: fadeIn 0.25s ease; }
 .page.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -349,7 +323,6 @@ white-space: nowrap;
 .mt-12 { margin-top: 12px; }
 .divider { height: 1px; background: var(–border); margin: 16px 0; }
 
-/* EXISTING DATA INDICATOR */
 .has-data { position: relative; }
 .has-data::after {
 content: ‘’;
@@ -368,8 +341,6 @@ background: var(–success);
 </head>
 <body>
 
-<!-- HEADER -->
-
 <div class="header">
   <div class="header-icon">📝</div>
   <div>
@@ -379,13 +350,9 @@ background: var(–success);
   <button class="header-back" id="backBtn" onclick="goBack()" disabled>← Back</button>
 </div>
 
-<!-- BREADCRUMB -->
-
 <div class="breadcrumb" id="breadcrumb">
   <span class="breadcrumb-item active">Select Class</span>
 </div>
-
-<!-- MAIN CONTENT -->
 
 <div class="main">
 
@@ -420,14 +387,10 @@ background: var(–success);
         <span class="card-arrow" id="ind-6C">›</span>
       </button>
     </div>
-
-```
-<div class="divider"></div>
-<button class="btn btn-success" onclick="showSummary()" style="width:100%;margin-top:4px;">
-  📊 View Summary & Export Excel
-</button>
-```
-
+    <div class="divider"></div>
+    <button class="btn btn-success" onclick="showSummary()" style="width:100%;margin-top:4px;">
+      📊 View Summary & Export Excel
+    </button>
   </div>
 
   <!-- PAGE 2: SELECT SUBJECT -->
@@ -471,14 +434,10 @@ background: var(–success);
 
 </div>
 
-<!-- FOOTER for marks page -->
-
 <div class="footer-actions" id="footer-marks" style="display:none;">
   <button class="btn btn-secondary" onclick="goBack()">← Back</button>
   <button class="btn btn-primary" onclick="saveAndChooseAnother()">✓ Save & Choose Another Subject</button>
 </div>
-
-<!-- FOOTER for summary page -->
 
 <div class="footer-actions" id="footer-summary" style="display:none;">
   <button class="btn btn-secondary" onclick="goBack()">← Back</button>
@@ -553,6 +512,7 @@ const STUDENTS = {
   ]
 };
 
+// 5 subjects only — MCT is a paper within Mathematics, not a separate subject
 const SUBJECTS = [
   {
     id: 'BM', label: 'Bahasa Melayu', icon: '🇧🇳', color: 'subj-BM',
@@ -584,13 +544,6 @@ const SUBJECTS = [
     ]
   },
   {
-    id: 'MCT', label: 'MCT', icon: '📖', color: 'subj-MCT',
-    papers: [
-      { name: 'Paper 1', max: 50 },
-      { name: 'Paper 2', max: 50 }
-    ]
-  },
-  {
     id: 'MIB', label: 'MIB', icon: '☪️', color: 'subj-MIB',
     papers: [
       { name: 'Paper 1', max: 100 }
@@ -604,7 +557,6 @@ let currentSubject = null;
 let currentPage = 'class';
 let pageStack = ['class'];
 
-// marks[class][subject][paperIdx][studentIdx] = value
 const marks = {};
 ['6A','6B','6C'].forEach(c => {
   marks[c] = {};
@@ -613,7 +565,6 @@ const marks = {};
   });
 });
 
-// Load saved marks from localStorage
 function loadMarks() {
   try {
     const saved = localStorage.getItem('year6marks');
@@ -743,9 +694,9 @@ function renderMarksPage() {
         <div class="student-row">
           <span class="student-num">${si+1}</span>
           <span class="student-name">${name}</span>
-          <input type="number" class="mark-input" 
+          <input type="number" class="mark-input"
             id="inp-${pi}-${si}"
-            min="0" max="${paper.max}" 
+            min="0" max="${paper.max}"
             value="${val}"
             placeholder="—"
             oninput="onMarkInput(${pi},${si},${paper.max},this)"
@@ -786,12 +737,10 @@ function onMarkInput(pi, si, max, el) {
 function handleKeydown(e, pi, si, totalStudents, totalPapers) {
   if (e.key === 'Enter' || e.key === 'ArrowDown') {
     e.preventDefault();
-    // Move to next student in same paper
     if (si + 1 < totalStudents) {
       const next = document.getElementById(`inp-${pi}-${si+1}`);
       if (next) next.focus();
     } else if (pi + 1 < totalPapers) {
-      // Move to first student of next paper
       const next = document.getElementById(`inp-${pi+1}-0`);
       if (next) next.focus();
     }
@@ -875,7 +824,7 @@ function showSummary() {
 function renderSummary() {
   const content = document.getElementById('summary-content');
   let html = '';
-  
+
   ['6A','6B','6C'].forEach(cls => {
     SUBJECTS.forEach(subj => {
       const paperMarks = marks[cls][subj.id];
@@ -926,7 +875,6 @@ function exportExcel() {
       const students = STUDENTS[cls];
       const sheetName = cls + ' ' + subj.id;
 
-      // Build header row
       const headers = ['No.', 'Student Name', ...subj.papers.map(p => p.name + ' (/' + p.max + ')')];
       const rows = [headers];
 
@@ -939,13 +887,10 @@ function exportExcel() {
         rows.push(row);
       });
 
-      // Max marks row
       const maxRow = ['', 'MAX MARKS', ...subj.papers.map(p => p.max)];
       rows.splice(1, 0, maxRow);
 
       const ws = XLSX.utils.aoa_to_sheet(rows);
-
-      // Column widths
       ws['!cols'] = [
         {wch: 4},
         {wch: 44},
@@ -956,7 +901,6 @@ function exportExcel() {
     });
   });
 
-  // Overview sheet
   const overviewRows = [['Class', 'Subject', 'Paper', 'Students With Marks', 'Total Students']];
   ['6A','6B','6C'].forEach(cls => {
     SUBJECTS.forEach(subj => {
