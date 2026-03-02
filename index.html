@@ -792,53 +792,47 @@ function updateProgress() {
 // ===================== POWER AUTOMATE SAVE =====================
 const POWER_AUTOMATE_URL = "https://default055b48fa571c47108e87b79ff84ea4.86.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/86b510f2c064485a9f56f1d9b0aeeb73/triggers/manual/paths/invoke?api-version=1";
 
-async function saveToOneDrive(cls, subjId) {
-  const subj = SUBJECTS.find(s => s.id === subjId);
-  const students = STUDENTS[cls];
+async function saveAndChooseAnother() {
+  const subj = SUBJECTS.find(s => s.id === currentSubject);
+  const students = STUDENTS[currentClass];
   const today = new Date().toLocaleDateString('en-GB');
-  const promises = [];
+  let count = 0;
+  let errMsg = '';
 
-  subj.papers.forEach((paper, pi) => {
-    students.forEach((name, si) => {
-      const val = marks[cls][subjId][pi][si];
-      if (val !== '') {
-        promises.push(
-          fetch(POWER_AUTOMATE_URL, {
+  try {
+    for (const [pi, paper] of subj.papers.entries()) {
+      for (const [si, name] of students.entries()) {
+        const val = marks[currentClass][currentSubject][pi][si];
+        if (val !== '') {
+          const res = await fetch(POWER_AUTOMATE_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               date: today,
-              class: cls,
+              class: currentClass,
               subject: subj.label,
               studentName: name,
               paper: paper.name,
               mark: parseFloat(val)
             })
-          })
-        );
+          });
+          if (res.ok) count++;
+          else errMsg = 'HTTP ' + res.status;
+        }
       }
-    });
-  });
-
-  if (promises.length === 0) return true;
-  try {
-    await Promise.all(promises);
-    return true;
-  } catch (e) {
-    console.error('Save error:', e);
-    return false;
+    }
+    if (count === 0 && !errMsg) alert('No marks entered to save!');
+    else if (errMsg) alert('Error saving: ' + errMsg);
+    else alert('Saved ' + count + ' marks to OneDrive!');
+  } catch(e) {
+    alert('Connection error: ' + e.message);
   }
-}
 
-async function saveAndChooseAnother() {
-  showToast('Saving to OneDrive...');
-  const ok = await saveToOneDrive(currentClass, currentSubject);
   pageStack = ['class', 'subject'];
   currentSubject = null;
   renderSubjectPage();
   showPage('subject');
   updateBreadcrumb();
-  showToast(ok ? '✅ Marks saved to OneDrive!' : '⚠️ Saved locally. Check connection.');
 }
 
 // ===================== SUMMARY =====================
