@@ -613,6 +613,31 @@ const marks = {};
   });
 });
 
+// Load saved marks from localStorage
+function loadMarks() {
+  try {
+    const saved = localStorage.getItem('year6marks');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      ['6A','6B','6C'].forEach(c => {
+        SUBJECTS.forEach(s => {
+          if (parsed[c] && parsed[c][s.id]) {
+            marks[c][s.id] = parsed[c][s.id];
+          }
+        });
+      });
+    }
+  } catch(e) {}
+}
+
+function saveMarksLocally() {
+  try {
+    localStorage.setItem('year6marks', JSON.stringify(marks));
+  } catch(e) {}
+}
+
+loadMarks();
+
 // ===================== NAVIGATION =====================
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -739,6 +764,7 @@ function renderMarksPage() {
   }).join('');
 
   updateProgress();
+  saveMarksLocally();
 }
 
 function onMarkInput(pi, si, max, el) {
