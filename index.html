@@ -68,7 +68,7 @@ cursor: pointer;
 display: flex; align-items: center; gap: 6px;
 transition: all 0.2s;
 }
-.header-back:hover { background: var(–surface2); border-color: var(–accent); color: var(–accent); }
+.header-back:hover { border-color: var(–accent); color: var(–accent); }
 .header-back:disabled { opacity: 0.3; cursor: not-allowed; }
 
 .breadcrumb {
@@ -118,138 +118,111 @@ font-size: 18px; flex-shrink: 0;
 }
 .card-label { font-size: 15px; font-weight: 600; }
 .card-desc { font-size: 12px; color: var(–muted); margin-top: 2px; }
-.card-arrow { margin-left: auto; color: var(–muted); font-size: 16px; }
+.card-right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
 
+/* Test card accent colours */
+.test-T1 { border-left: 3px solid #3b82f6; }
+.test-T1:hover { background: rgba(59,130,246,0.08); border-color: #3b82f6; }
+.test-T1 .card-icon { background: rgba(59,130,246,0.15); }
+
+.test-T2 { border-left: 3px solid #a855f7; }
+.test-T2:hover { background: rgba(168,85,247,0.08); border-color: #a855f7; }
+.test-T2 .card-icon { background: rgba(168,85,247,0.15); }
+
+.test-T3 { border-left: 3px solid #f59e0b; }
+.test-T3:hover { background: rgba(245,158,11,0.08); border-color: #f59e0b; }
+.test-T3 .card-icon { background: rgba(245,158,11,0.15); }
+
+.test-T4 { border-left: 3px solid #ef4444; }
+.test-T4:hover { background: rgba(239,68,68,0.08); border-color: #ef4444; }
+.test-T4 .card-icon { background: rgba(239,68,68,0.15); }
+
+/* Class / Subject icon colours */
 .cls-6A .card-icon { background: rgba(59,130,246,0.15); }
 .cls-6B .card-icon { background: rgba(52,211,153,0.15); }
 .cls-6C .card-icon { background: rgba(251,146,60,0.15); }
-
 .subj-BM .card-icon { background: rgba(59,130,246,0.15); }
 .subj-ENG .card-icon { background: rgba(124,58,237,0.15); }
 .subj-SCI .card-icon { background: rgba(52,211,153,0.15); }
 .subj-MTH .card-icon { background: rgba(251,146,60,0.15); }
 .subj-MIB .card-icon { background: rgba(234,179,8,0.15); }
 
+/* Active test pill shown on class/subject/marks pages */
+.test-pill {
+display: inline-flex; align-items: center; gap: 6px;
+padding: 4px 12px; border-radius: 20px;
+font-size: 11px; font-weight: 600;
+margin-bottom: 14px;
+font-family: ‘JetBrains Mono’, monospace;
+}
+.pill-T1 { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+.pill-T2 { background: rgba(168,85,247,0.15); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
+.pill-T3 { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+.pill-T4 { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+
 .badge {
 font-family: ‘JetBrains Mono’, monospace;
-font-size: 10px;
-padding: 2px 7px;
-border-radius: 20px;
-font-weight: 600;
+font-size: 10px; padding: 2px 7px;
+border-radius: 20px; font-weight: 600;
 }
 .badge-blue { background: rgba(59,130,246,0.2); color: var(–accent2); border: 1px solid rgba(59,130,246,0.3); }
 .badge-green { background: rgba(63,185,80,0.2); color: var(–success); border: 1px solid rgba(63,185,80,0.3); }
+.badge-T1 { background: rgba(59,130,246,0.2); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3); }
+.badge-T2 { background: rgba(168,85,247,0.2); color: #c084fc; border: 1px solid rgba(168,85,247,0.3); }
+.badge-T3 { background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.3); }
+.badge-T4 { background: rgba(239,68,68,0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
 
 .entry-header {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: var(–radius);
-padding: 14px 16px;
-margin-bottom: 16px;
-display: flex; align-items: center; gap: 10px;
+background: var(–surface); border: 1px solid var(–border);
+border-radius: var(–radius); padding: 14px 16px;
+margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
 }
 .entry-header-info .label { font-size: 11px; color: var(–muted); text-transform: uppercase; letter-spacing: 0.5px; }
 .entry-header-info .value { font-size: 14px; font-weight: 600; }
 
 .papers-container { display: flex; flex-direction: column; gap: 20px; }
-
-.paper-section {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: var(–radius);
-overflow: hidden;
-}
-.paper-header {
-padding: 12px 16px;
-background: var(–surface2);
-border-bottom: 1px solid var(–border);
-display: flex; align-items: center; justify-content: space-between;
-}
+.paper-section { background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); overflow: hidden; }
+.paper-header { padding: 12px 16px; background: var(–surface2); border-bottom: 1px solid var(–border); display: flex; align-items: center; justify-content: space-between; }
 .paper-name { font-size: 13px; font-weight: 600; }
 .paper-max { font-family: ‘JetBrains Mono’, monospace; font-size: 12px; color: var(–muted); }
 
 .student-row {
 display: flex; align-items: center;
-padding: 10px 16px;
-border-bottom: 1px solid rgba(48,54,61,0.5);
-gap: 12px;
-transition: background 0.15s;
+padding: 10px 16px; border-bottom: 1px solid rgba(48,54,61,0.5);
+gap: 12px; transition: background 0.15s;
 }
 .student-row:last-child { border-bottom: none; }
 .student-row:hover { background: rgba(48,54,61,0.3); }
-
-.student-num {
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 11px;
-color: var(–muted);
-min-width: 22px;
-text-align: center;
-}
-.student-name {
-font-size: 13px;
-flex: 1;
-line-height: 1.3;
-}
+.student-num { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; color: var(–muted); min-width: 22px; text-align: center; }
+.student-name { font-size: 13px; flex: 1; line-height: 1.3; }
 .mark-input {
-width: 64px;
-background: var(–bg);
-border: 1px solid var(–border);
-border-radius: var(–radius-sm);
-color: var(–text);
-font-family: ‘JetBrains Mono’, monospace;
-font-size: 14px;
-font-weight: 600;
-text-align: center;
-padding: 6px 4px;
-transition: all 0.2s;
+width: 64px; background: var(–bg); border: 1px solid var(–border);
+border-radius: var(–radius-sm); color: var(–text);
+font-family: ‘JetBrains Mono’, monospace; font-size: 14px; font-weight: 600;
+text-align: center; padding: 6px 4px; transition: all 0.2s;
 -moz-appearance: textfield;
 }
 .mark-input::-webkit-inner-spin-button,
 .mark-input::-webkit-outer-spin-button { -webkit-appearance: none; }
-.mark-input:focus {
-outline: none;
-border-color: var(–accent);
-background: var(–accent-glow);
-box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-}
+.mark-input:focus { outline: none; border-color: var(–accent); background: var(–accent-glow); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
 .mark-input.over { border-color: var(–danger); background: rgba(248,81,73,0.1); }
 .mark-input.filled { border-color: var(–success); }
 
-.progress-wrap {
-margin-bottom: 16px;
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: var(–radius);
-padding: 12px 16px;
-}
+.progress-wrap { margin-bottom: 16px; background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); padding: 12px 16px; }
 .progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 12px; color: var(–muted); }
-.progress-bar-bg {
-height: 6px; border-radius: 3px;
-background: var(–border);
-overflow: hidden;
-}
-.progress-bar-fill {
-height: 100%; border-radius: 3px;
-background: linear-gradient(90deg, var(–accent), #7c3aed);
-transition: width 0.3s ease;
-}
+.progress-bar-bg { height: 6px; border-radius: 3px; background: var(–border); overflow: hidden; }
+.progress-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(–accent), #7c3aed); transition: width 0.3s ease; }
 
 .footer-actions {
 position: fixed; bottom: 0; left: 0; right: 0;
-background: var(–surface);
-border-top: 1px solid var(–border);
-padding: 12px 16px;
-display: flex; gap: 10px;
+background: var(–surface); border-top: 1px solid var(–border);
+padding: 12px 16px; display: flex; gap: 10px;
 max-width: 600px; margin: 0 auto;
 }
 .btn {
-flex: 1; padding: 13px;
-border-radius: var(–radius);
-font-family: ‘Sora’, sans-serif;
-font-size: 14px; font-weight: 600;
-cursor: pointer;
-border: none;
-transition: all 0.2s;
+flex: 1; padding: 13px; border-radius: var(–radius);
+font-family: ‘Sora’, sans-serif; font-size: 14px; font-weight: 600;
+cursor: pointer; border: none; transition: all 0.2s;
 display: flex; align-items: center; justify-content: center; gap: 6px;
 }
 .btn-primary { background: var(–accent); color: white; }
@@ -259,60 +232,28 @@ display: flex; align-items: center; justify-content: center; gap: 6px;
 .btn-success { background: var(–success); color: white; }
 .btn-success:hover { background: #2ea043; }
 
-.summary-table {
-width: 100%;
-border-collapse: collapse;
-font-size: 12px;
-margin-top: 12px;
+/* Summary */
+.summary-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.sum-tab {
+padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600;
+cursor: pointer; border: 1px solid var(–border); background: var(–surface2);
+color: var(–muted); transition: all 0.2s; font-family: ‘Sora’, sans-serif;
 }
-.summary-table th {
-background: var(–surface2);
-padding: 8px 10px;
-text-align: left;
-font-size: 11px;
-color: var(–muted);
-text-transform: uppercase;
-letter-spacing: 0.5px;
-border: 1px solid var(–border);
-}
-.summary-table td {
-padding: 7px 10px;
-border: 1px solid var(–border);
-font-family: ‘JetBrains Mono’, monospace;
-}
+.sum-tab.active-T1 { background: rgba(59,130,246,0.15); color: #60a5fa; border-color: rgba(59,130,246,0.4); }
+.sum-tab.active-T2 { background: rgba(168,85,247,0.15); color: #c084fc; border-color: rgba(168,85,247,0.4); }
+.sum-tab.active-T3 { background: rgba(245,158,11,0.15); color: #fbbf24; border-color: rgba(245,158,11,0.4); }
+.sum-tab.active-T4 { background: rgba(239,68,68,0.15); color: #f87171; border-color: rgba(239,68,68,0.4); }
+
+.summary-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 12px; }
+.summary-table th { background: var(–surface2); padding: 8px 10px; text-align: left; font-size: 11px; color: var(–muted); text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid var(–border); }
+.summary-table td { padding: 7px 10px; border: 1px solid var(–border); font-family: ‘JetBrains Mono’, monospace; }
 .summary-table tr:hover td { background: rgba(48,54,61,0.3); }
 .summary-name { font-family: ‘Sora’, sans-serif; font-size: 12px; }
-
-.summary-card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: var(–radius);
-margin-bottom: 16px;
-overflow: hidden;
-}
-.summary-card-header {
-padding: 12px 16px;
-background: var(–surface2);
-border-bottom: 1px solid var(–border);
-font-size: 13px; font-weight: 600;
-display: flex; align-items: center; gap: 8px;
-}
-
+.summary-card { background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); margin-bottom: 16px; overflow: hidden; }
+.summary-card-header { padding: 12px 16px; background: var(–surface2); border-bottom: 1px solid var(–border); font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
 .export-area { margin-bottom: 80px; }
 
-.toast {
-position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
-background: var(–success);
-color: white;
-padding: 10px 20px;
-border-radius: 20px;
-font-size: 13px; font-weight: 600;
-z-index: 999;
-opacity: 0;
-transition: opacity 0.3s;
-pointer-events: none;
-white-space: nowrap;
-}
+.toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(–success); color: white; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: 600; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; white-space: nowrap; }
 .toast.show { opacity: 1; }
 
 .page { display: none; animation: fadeIn 0.25s ease; }
@@ -320,17 +261,7 @@ white-space: nowrap;
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
 .pb-80 { padding-bottom: 80px; }
-.mt-12 { margin-top: 12px; }
 .divider { height: 1px; background: var(–border); margin: 16px 0; }
-
-.has-data { position: relative; }
-.has-data::after {
-content: ‘’;
-position: absolute; top: 12px; right: 12px;
-width: 8px; height: 8px;
-border-radius: 50%;
-background: var(–success);
-}
 
 @media (max-width: 400px) {
 .student-name { font-size: 11px; }
@@ -351,40 +282,48 @@ background: var(–success);
 </div>
 
 <div class="breadcrumb" id="breadcrumb">
-  <span class="breadcrumb-item active">Select Class</span>
+  <span class="breadcrumb-item active">Select Test</span>
 </div>
 
 <div class="main">
 
-  <!-- PAGE 1: SELECT CLASS -->
+  <!-- PAGE 0: SELECT TEST -->
 
-  <div class="page active" id="page-class">
-    <div class="step-title">Select Class</div>
-    <div class="step-sub">Choose the class you want to enter marks for</div>
+  <div class="page active" id="page-test">
+    <div class="step-title">Select Test</div>
+    <div class="step-sub">Choose which test you are entering marks for</div>
     <div class="cards-grid">
-      <button class="card-btn cls-6A" onclick="selectClass('6A')">
+      <button class="card-btn test-T1" onclick="selectTest('T1')">
         <div class="card-icon">🔵</div>
         <div>
-          <div class="card-label">Class 6A</div>
-          <div class="card-desc">17 students</div>
+          <div class="card-label">Test 1</div>
+          <div class="card-desc" id="desc-T1">No marks entered yet</div>
         </div>
-        <span class="card-arrow" id="ind-6A">›</span>
+        <div class="card-right"><span id="ind-T1">›</span></div>
       </button>
-      <button class="card-btn cls-6B" onclick="selectClass('6B')">
-        <div class="card-icon">🟢</div>
+      <button class="card-btn test-T2" onclick="selectTest('T2')">
+        <div class="card-icon">🟣</div>
         <div>
-          <div class="card-label">Class 6B</div>
-          <div class="card-desc">19 students</div>
+          <div class="card-label">Test 2</div>
+          <div class="card-desc" id="desc-T2">No marks entered yet</div>
         </div>
-        <span class="card-arrow" id="ind-6B">›</span>
+        <div class="card-right"><span id="ind-T2">›</span></div>
       </button>
-      <button class="card-btn cls-6C" onclick="selectClass('6C')">
-        <div class="card-icon">🟠</div>
+      <button class="card-btn test-T3" onclick="selectTest('T3')">
+        <div class="card-icon">🟡</div>
         <div>
-          <div class="card-label">Class 6C</div>
-          <div class="card-desc">19 students</div>
+          <div class="card-label">Test 3</div>
+          <div class="card-desc" id="desc-T3">No marks entered yet</div>
         </div>
-        <span class="card-arrow" id="ind-6C">›</span>
+        <div class="card-right"><span id="ind-T3">›</span></div>
+      </button>
+      <button class="card-btn test-T4" onclick="selectTest('T4')">
+        <div class="card-icon">🔴</div>
+        <div>
+          <div class="card-label">Test 4</div>
+          <div class="card-desc" id="desc-T4">No marks entered yet</div>
+        </div>
+        <div class="card-right"><span id="ind-T4">›</span></div>
       </button>
     </div>
     <div class="divider"></div>
@@ -393,9 +332,35 @@ background: var(–success);
     </button>
   </div>
 
+  <!-- PAGE 1: SELECT CLASS -->
+
+  <div class="page" id="page-class">
+    <div id="class-test-pill"></div>
+    <div class="step-title">Select Class</div>
+    <div class="step-sub" id="class-sub">Choose the class you want to enter marks for</div>
+    <div class="cards-grid">
+      <button class="card-btn cls-6A" onclick="selectClass('6A')">
+        <div class="card-icon">🔵</div>
+        <div><div class="card-label">Class 6A</div><div class="card-desc">17 students</div></div>
+        <div class="card-right"><span id="ind-6A">›</span></div>
+      </button>
+      <button class="card-btn cls-6B" onclick="selectClass('6B')">
+        <div class="card-icon">🟢</div>
+        <div><div class="card-label">Class 6B</div><div class="card-desc">19 students</div></div>
+        <div class="card-right"><span id="ind-6B">›</span></div>
+      </button>
+      <button class="card-btn cls-6C" onclick="selectClass('6C')">
+        <div class="card-icon">🟠</div>
+        <div><div class="card-label">Class 6C</div><div class="card-desc">19 students</div></div>
+        <div class="card-right"><span id="ind-6C">›</span></div>
+      </button>
+    </div>
+  </div>
+
   <!-- PAGE 2: SELECT SUBJECT -->
 
   <div class="page" id="page-subject">
+    <div id="subj-test-pill"></div>
     <div class="step-title" id="subj-title">Select Subject</div>
     <div class="step-sub" id="subj-sub">Choose which subject to enter marks for</div>
     <div class="cards-grid" id="subject-cards"></div>
@@ -407,8 +372,8 @@ background: var(–success);
     <div class="entry-header">
       <div style="font-size:24px" id="marks-icon">📚</div>
       <div class="entry-header-info">
-        <div class="label">Class / Subject</div>
-        <div class="value" id="marks-heading">6A — BM</div>
+        <div class="label">Test / Class / Subject</div>
+        <div class="value" id="marks-heading">—</div>
       </div>
       <div id="marks-badge"></div>
     </div>
@@ -428,16 +393,21 @@ background: var(–success);
 
   <div class="page pb-80" id="page-summary">
     <div class="step-title">Summary & Export</div>
-    <div class="step-sub">Review all entered marks before downloading</div>
+    <div class="step-sub">Switch between tests using the tabs below</div>
+    <div class="summary-tabs" id="summary-tabs"></div>
     <div class="export-area" id="summary-content"></div>
   </div>
 
 </div>
 
+<!-- FOOTER: marks page -->
+
 <div class="footer-actions" id="footer-marks" style="display:none;">
   <button class="btn btn-secondary" onclick="goBack()">← Back</button>
   <button class="btn btn-primary" onclick="saveAndChooseAnother()">✓ Save & Choose Another Subject</button>
 </div>
+
+<!-- FOOTER: summary page -->
 
 <div class="footer-actions" id="footer-summary" style="display:none;">
   <button class="btn btn-secondary" onclick="goBack()">← Back</button>
@@ -512,69 +482,69 @@ const STUDENTS = {
   ]
 };
 
-// 5 subjects only — MCT is a paper within Mathematics, not a separate subject
 const SUBJECTS = [
   {
     id: 'BM', label: 'Bahasa Melayu', icon: '🇧🇳', color: 'subj-BM',
-    papers: [
-      { name: 'Paper 1', max: 50 },
-      { name: 'Paper 2', max: 100 }
-    ]
+    papers: [{ name: 'Paper 1', max: 50 }, { name: 'Paper 2', max: 100 }]
   },
   {
     id: 'ENG', label: 'English', icon: '🇬🇧', color: 'subj-ENG',
-    papers: [
-      { name: 'Paper 1', max: 50 },
-      { name: 'Paper 2', max: 50 }
-    ]
+    papers: [{ name: 'Paper 1', max: 50 }, { name: 'Paper 2', max: 50 }]
   },
   {
     id: 'SCI', label: 'Science', icon: '🔬', color: 'subj-SCI',
-    papers: [
-      { name: 'Paper 1', max: 30 },
-      { name: 'Paper 2', max: 70 }
-    ]
+    papers: [{ name: 'Paper 1', max: 30 }, { name: 'Paper 2', max: 70 }]
   },
   {
     id: 'MTH', label: 'Mathematics', icon: '🔢', color: 'subj-MTH',
-    papers: [
-      { name: 'MCT', max: 30 },
-      { name: 'Paper 1', max: 90 },
-      { name: 'Paper 2', max: 90 }
-    ]
+    papers: [{ name: 'MCT', max: 30 }, { name: 'Paper 1', max: 90 }, { name: 'Paper 2', max: 90 }]
   },
   {
     id: 'MIB', label: 'MIB', icon: '☪️', color: 'subj-MIB',
-    papers: [
-      { name: 'Paper 1', max: 100 }
-    ]
+    papers: [{ name: 'Paper 1', max: 100 }]
   }
 ];
 
-// ===================== STATE =====================
-let currentClass = null;
-let currentSubject = null;
-let currentPage = 'class';
-let pageStack = ['class'];
+const TESTS = [
+  { id: 'T1', label: 'Test 1', pillClass: 'pill-T1', badgeClass: 'badge-T1' },
+  { id: 'T2', label: 'Test 2', pillClass: 'pill-T2', badgeClass: 'badge-T2' },
+  { id: 'T3', label: 'Test 3', pillClass: 'pill-T3', badgeClass: 'badge-T3' },
+  { id: 'T4', label: 'Test 4', pillClass: 'pill-T4', badgeClass: 'badge-T4' }
+];
 
+// ===================== STATE =====================
+let currentTest    = null;
+let currentClass   = null;
+let currentSubject = null;
+let currentPage    = 'test';
+let pageStack      = ['test'];
+let summaryTest    = 'T1';
+
+// marks[testId][class][subject][paperIdx][studentIdx]
 const marks = {};
-['6A','6B','6C'].forEach(c => {
-  marks[c] = {};
-  SUBJECTS.forEach(s => {
-    marks[c][s.id] = s.papers.map(() => Array(STUDENTS[c].length).fill(''));
+TESTS.forEach(t => {
+  marks[t.id] = {};
+  ['6A','6B','6C'].forEach(c => {
+    marks[t.id][c] = {};
+    SUBJECTS.forEach(s => {
+      marks[t.id][c][s.id] = s.papers.map(() => Array(STUDENTS[c].length).fill(''));
+    });
   });
 });
 
+// ===================== LOCALSTORAGE =====================
 function loadMarks() {
   try {
-    const saved = localStorage.getItem('year6marks');
+    const saved = localStorage.getItem('year6marks_v2');
     if (saved) {
       const parsed = JSON.parse(saved);
-      ['6A','6B','6C'].forEach(c => {
-        SUBJECTS.forEach(s => {
-          if (parsed[c] && parsed[c][s.id]) {
-            marks[c][s.id] = parsed[c][s.id];
-          }
+      TESTS.forEach(t => {
+        ['6A','6B','6C'].forEach(c => {
+          SUBJECTS.forEach(s => {
+            if (parsed[t.id] && parsed[t.id][c] && parsed[t.id][c][s.id]) {
+              marks[t.id][c][s.id] = parsed[t.id][c][s.id];
+            }
+          });
         });
       });
     }
@@ -582,61 +552,106 @@ function loadMarks() {
 }
 
 function saveMarksLocally() {
-  try {
-    localStorage.setItem('year6marks', JSON.stringify(marks));
-  } catch(e) {}
+  try { localStorage.setItem('year6marks_v2', JSON.stringify(marks)); } catch(e) {}
 }
 
 loadMarks();
+
+// ===================== HELPERS =====================
+function testInfo(tid) { return TESTS.find(t => t.id === tid); }
+
+function countTestEntries(tid) {
+  let n = 0;
+  ['6A','6B','6C'].forEach(c =>
+    SUBJECTS.forEach(s =>
+      marks[tid][c][s.id].forEach(p => { n += p.filter(v => v !== '').length; })
+    )
+  );
+  return n;
+}
+
+function makePill(tid) {
+  const t = testInfo(tid);
+  return `<div class="test-pill ${t.pillClass}">📋 ${t.label}</div>`;
+}
 
 // ===================== NAVIGATION =====================
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
-  document.getElementById('footer-marks').style.display = id === 'marks' ? 'flex' : 'none';
+  document.getElementById('footer-marks').style.display   = id === 'marks'   ? 'flex' : 'none';
   document.getElementById('footer-summary').style.display = id === 'summary' ? 'flex' : 'none';
   document.getElementById('backBtn').disabled = pageStack.length <= 1;
   currentPage = id;
+  window.scrollTo(0, 0);
 }
 
 function goBack() {
   if (pageStack.length <= 1) return;
   pageStack.pop();
   const prev = pageStack[pageStack.length - 1];
-  if (prev === 'class') { renderClassPage(); showPage('class'); updateBreadcrumb(); }
-  else if (prev === 'subject') { renderSubjectPage(); showPage('subject'); updateBreadcrumb(); }
+  if      (prev === 'test')    { renderTestPage();    showPage('test'); }
+  else if (prev === 'class')   { renderClassPage();   showPage('class'); }
+  else if (prev === 'subject') { renderSubjectPage(); showPage('subject'); }
+  updateBreadcrumb();
   document.getElementById('backBtn').disabled = pageStack.length <= 1;
 }
 
 function updateBreadcrumb() {
   const bc = document.getElementById('breadcrumb');
-  let html = '<span class="breadcrumb-item ' + (currentPage==='class'?'active':'') + '">Select Class</span>';
+  let html = `<span class="breadcrumb-item ${currentPage==='test'?'active':''}">Select Test</span>`;
+  if (currentTest) {
+    const t = testInfo(currentTest);
+    html += `<span class="breadcrumb-sep">›</span>`;
+    html += `<span class="breadcrumb-item ${currentPage==='class'?'active':''}">${t.label}</span>`;
+  }
   if (currentClass) {
-    html += '<span class="breadcrumb-sep">›</span>';
-    html += '<span class="breadcrumb-item ' + (currentPage==='subject'?'active':'') + '">' + currentClass + '</span>';
+    html += `<span class="breadcrumb-sep">›</span>`;
+    html += `<span class="breadcrumb-item ${currentPage==='subject'?'active':''}">${currentClass}</span>`;
   }
   if (currentSubject) {
     const s = SUBJECTS.find(x => x.id === currentSubject);
-    html += '<span class="breadcrumb-sep">›</span>';
-    html += '<span class="breadcrumb-item active">' + s.label + '</span>';
+    html += `<span class="breadcrumb-sep">›</span>`;
+    html += `<span class="breadcrumb-item active">${s.label}</span>`;
   }
   bc.innerHTML = html;
 }
 
+// ===================== TEST PAGE =====================
+function renderTestPage() {
+  currentTest = null; currentClass = null; currentSubject = null;
+  TESTS.forEach(t => {
+    const n = countTestEntries(t.id);
+    document.getElementById('desc-' + t.id).textContent =
+      n > 0 ? `${n} mark${n !== 1 ? 's' : ''} entered` : 'No marks entered yet';
+    document.getElementById('ind-' + t.id).textContent = n > 0 ? '✓' : '›';
+  });
+}
+
+function selectTest(tid) {
+  currentTest = tid;
+  pageStack = ['test', 'class'];
+  renderClassPage();
+  showPage('class');
+  updateBreadcrumb();
+}
+
 // ===================== CLASS PAGE =====================
 function renderClassPage() {
-  currentSubject = null;
+  currentClass = null; currentSubject = null;
+  document.getElementById('class-test-pill').innerHTML = makePill(currentTest);
+  document.getElementById('class-sub').textContent = `Entering marks for ${testInfo(currentTest).label}`;
   ['6A','6B','6C'].forEach(c => {
-    const ind = document.getElementById('ind-' + c);
-    const hasAny = SUBJECTS.some(s => marks[c][s.id].some(paper => paper.some(v => v !== '')));
-    if (hasAny) ind.innerHTML = '✓';
-    else ind.innerHTML = '›';
+    const hasAny = SUBJECTS.some(s =>
+      marks[currentTest][c][s.id].some(p => p.some(v => v !== ''))
+    );
+    document.getElementById('ind-' + c).textContent = hasAny ? '✓' : '›';
   });
 }
 
 function selectClass(cls) {
   currentClass = cls;
-  pageStack = ['class', 'subject'];
+  pageStack.push('subject');
   renderSubjectPage();
   showPage('subject');
   updateBreadcrumb();
@@ -644,35 +659,37 @@ function selectClass(cls) {
 
 // ===================== SUBJECT PAGE =====================
 function renderSubjectPage() {
-  document.getElementById('subj-title').textContent = 'Select Subject — ' + currentClass;
-  document.getElementById('subj-sub').textContent = 'Choose which subject to enter marks for';
+  currentSubject = null;
+  document.getElementById('subj-test-pill').innerHTML = makePill(currentTest);
+  document.getElementById('subj-title').textContent = `Select Subject — ${currentClass}`;
+  document.getElementById('subj-sub').textContent   = `${testInfo(currentTest).label} · ${currentClass}`;
 
-  const grid = document.getElementById('subject-cards');
-  grid.innerHTML = SUBJECTS.map(s => {
-    const paperMarks = marks[currentClass][s.id];
-    const total = paperMarks.reduce((a,p) => a + p.filter(v=>v!=='').length, 0);
-    const maxTotal = s.papers.length * STUDENTS[currentClass].length;
-    const complete = total === maxTotal && maxTotal > 0;
-    const partial = total > 0 && !complete;
-    const statusBadge = complete
-      ? '<span class="badge badge-green">✓ Complete</span>'
+  const t = testInfo(currentTest);
+  document.getElementById('subject-cards').innerHTML = SUBJECTS.map(s => {
+    const pm = marks[currentTest][currentClass][s.id];
+    const filled   = pm.reduce((a, p) => a + p.filter(v => v !== '').length, 0);
+    const maxFill  = s.papers.length * STUDENTS[currentClass].length;
+    const complete = filled === maxFill && maxFill > 0;
+    const partial  = filled > 0 && !complete;
+    const badge = complete
+      ? `<span class="badge badge-green">✓ Complete</span>`
       : partial
-        ? `<span class="badge badge-blue">${total}/${maxTotal}</span>`
+        ? `<span class="badge ${t.badgeClass}">${filled}/${maxFill}</span>`
         : '';
     return `
       <button class="card-btn ${s.color}" onclick="selectSubject('${s.id}')">
         <div class="card-icon">${s.icon}</div>
         <div>
           <div class="card-label">${s.label}</div>
-          <div class="card-desc">${s.papers.map(p=>p.name+' (max '+p.max+')').join(', ')}</div>
+          <div class="card-desc">${s.papers.map(p => p.name + ' (max ' + p.max + ')').join(', ')}</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px">${statusBadge}<span style="color:var(--muted);font-size:16px">›</span></div>
+        <div style="display:flex;align-items:center;gap:8px">${badge}<span style="color:var(--muted);font-size:16px">›</span></div>
       </button>`;
   }).join('');
 }
 
-function selectSubject(subjId) {
-  currentSubject = subjId;
+function selectSubject(sid) {
+  currentSubject = sid;
   pageStack.push('marks');
   renderMarksPage();
   showPage('marks');
@@ -681,27 +698,25 @@ function selectSubject(subjId) {
 
 // ===================== MARKS PAGE =====================
 function renderMarksPage() {
-  const subj = SUBJECTS.find(s => s.id === currentSubject);
+  const subj     = SUBJECTS.find(s => s.id === currentSubject);
   const students = STUDENTS[currentClass];
-  document.getElementById('marks-icon').textContent = subj.icon;
-  document.getElementById('marks-heading').textContent = currentClass + ' — ' + subj.label;
+  const t        = testInfo(currentTest);
 
-  const area = document.getElementById('papers-area');
-  area.innerHTML = subj.papers.map((paper, pi) => {
+  document.getElementById('marks-icon').textContent    = subj.icon;
+  document.getElementById('marks-heading').textContent = `${t.label} · ${currentClass} · ${subj.label}`;
+  document.getElementById('marks-badge').innerHTML     = `<span class="badge ${t.badgeClass}">${t.label}</span>`;
+
+  document.getElementById('papers-area').innerHTML = subj.papers.map((paper, pi) => {
     const rows = students.map((name, si) => {
-      const val = marks[currentClass][currentSubject][pi][si];
+      const val = marks[currentTest][currentClass][currentSubject][pi][si];
       return `
         <div class="student-row">
-          <span class="student-num">${si+1}</span>
+          <span class="student-num">${si + 1}</span>
           <span class="student-name">${name}</span>
-          <input type="number" class="mark-input"
-            id="inp-${pi}-${si}"
-            min="0" max="${paper.max}"
-            value="${val}"
-            placeholder="—"
+          <input type="number" class="mark-input ${val !== '' ? 'filled' : ''}"
+            id="inp-${pi}-${si}" min="0" max="${paper.max}" value="${val}" placeholder="—"
             oninput="onMarkInput(${pi},${si},${paper.max},this)"
-            onkeydown="handleKeydown(event,${pi},${si},${students.length},${subj.papers.length})"
-          >
+            onkeydown="handleKeydown(event,${pi},${si},${students.length},${subj.papers.length})">
         </div>`;
     }).join('');
     return `
@@ -709,8 +724,7 @@ function renderMarksPage() {
         <div class="paper-header">
           <span class="paper-name">${paper.name}</span>
           <span class="paper-max">Max: ${paper.max}</span>
-        </div>
-        ${rows}
+        </div>${rows}
       </div>`;
   }).join('');
 
@@ -720,70 +734,59 @@ function renderMarksPage() {
 
 function onMarkInput(pi, si, max, el) {
   const val = el.value.trim();
-  if (val === '') {
-    marks[currentClass][currentSubject][pi][si] = '';
-    el.classList.remove('over','filled');
-  } else {
-    const num = parseFloat(val);
-    marks[currentClass][currentSubject][pi][si] = val;
-    if (num > max) el.classList.add('over');
-    else el.classList.remove('over');
-    if (val !== '') el.classList.add('filled');
-    else el.classList.remove('filled');
-  }
+  marks[currentTest][currentClass][currentSubject][pi][si] = val;
+  const num = parseFloat(val);
+  el.classList.toggle('over',   val !== '' && num > max);
+  el.classList.toggle('filled', val !== '');
   updateProgress();
+  saveMarksLocally();
 }
 
 function handleKeydown(e, pi, si, totalStudents, totalPapers) {
   if (e.key === 'Enter' || e.key === 'ArrowDown') {
     e.preventDefault();
-    if (si + 1 < totalStudents) {
-      const next = document.getElementById(`inp-${pi}-${si+1}`);
-      if (next) next.focus();
-    } else if (pi + 1 < totalPapers) {
-      const next = document.getElementById(`inp-${pi+1}-0`);
-      if (next) next.focus();
-    }
+    const next = si + 1 < totalStudents
+      ? document.getElementById(`inp-${pi}-${si + 1}`)
+      : pi + 1 < totalPapers ? document.getElementById(`inp-${pi + 1}-0`) : null;
+    if (next) next.focus();
   }
   if (e.key === 'ArrowUp') {
     e.preventDefault();
-    if (si - 1 >= 0) {
-      const prev = document.getElementById(`inp-${pi}-${si-1}`);
-      if (prev) prev.focus();
-    }
+    const prev = si - 1 >= 0 ? document.getElementById(`inp-${pi}-${si - 1}`) : null;
+    if (prev) prev.focus();
   }
 }
 
 function updateProgress() {
   const subj = SUBJECTS.find(s => s.id === currentSubject);
-  const students = STUDENTS[currentClass];
-  const allMarks = marks[currentClass][currentSubject];
-  const total = allMarks.reduce((a,p) => a + p.filter(v=>v!=='').length, 0);
-  const maxTotal = subj.papers.length * students.length;
-  document.getElementById('prog-count').textContent = total + ' / ' + maxTotal;
-  document.getElementById('prog-bar').style.width = (maxTotal > 0 ? (total/maxTotal*100) : 0) + '%';
+  const pm   = marks[currentTest][currentClass][currentSubject];
+  const filled   = pm.reduce((a, p) => a + p.filter(v => v !== '').length, 0);
+  const maxFill  = subj.papers.length * STUDENTS[currentClass].length;
+  document.getElementById('prog-count').textContent  = `${filled} / ${maxFill}`;
+  document.getElementById('prog-bar').style.width = (maxFill > 0 ? filled / maxFill * 100 : 0) + '%';
 }
 
 // ===================== POWER AUTOMATE SAVE =====================
 const POWER_AUTOMATE_URL = "https://default055b48fa571c47108e87b79ff84ea4.86.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/86b510f2c064485a9f56f1d9b0aeeb73/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zc2gKRg-l_y08EaxlImN2yP-f0aEEph8sRUvxb3hh1U";
 
 async function saveAndChooseAnother() {
-  const subj = SUBJECTS.find(s => s.id === currentSubject);
+  const subj     = SUBJECTS.find(s => s.id === currentSubject);
   const students = STUDENTS[currentClass];
-  const today = new Date().toLocaleDateString('en-GB');
-  let count = 0;
-  let errMsg = '';
+  const t        = testInfo(currentTest);
+  const today    = new Date().toLocaleDateString('en-GB');
+  let count = 0, errMsg = '';
 
   try {
     for (const [pi, paper] of subj.papers.entries()) {
       for (const [si, name] of students.entries()) {
-        const val = marks[currentClass][currentSubject][pi][si];
+        const val = marks[currentTest][currentClass][currentSubject][pi][si];
         if (val !== '') {
           const res = await fetch(POWER_AUTOMATE_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               date: today,
+              test: t.label,
               class: currentClass,
               subject: subj.label,
               studentName: name,
@@ -798,12 +801,12 @@ async function saveAndChooseAnother() {
     }
     if (count === 0 && !errMsg) alert('No marks entered to save!');
     else if (errMsg) alert('Error saving: ' + errMsg);
-    else alert('Saved ' + count + ' marks to OneDrive!');
+    else alert(`Saved ${count} marks to OneDrive!`);
   } catch(e) {
     alert('Connection error: ' + e.message);
   }
 
-  pageStack = ['class', 'subject'];
+  pageStack = ['test', 'class', 'subject'];
   currentSubject = null;
   renderSubjectPage();
   showPage('subject');
@@ -812,46 +815,61 @@ async function saveAndChooseAnother() {
 
 // ===================== SUMMARY =====================
 function showSummary() {
-  pageStack = ['class', 'summary'];
-  currentClass = null;
-  currentSubject = null;
+  pageStack = ['test', 'summary'];
+  currentTest = null; currentClass = null; currentSubject = null;
+  summaryTest = 'T1';
+  renderSummaryTabs();
   renderSummary();
   showPage('summary');
   updateBreadcrumb();
   document.getElementById('backBtn').disabled = false;
 }
 
+function renderSummaryTabs() {
+  document.getElementById('summary-tabs').innerHTML = TESTS.map(t => {
+    const n      = countTestEntries(t.id);
+    const active = summaryTest === t.id ? `active-${t.id}` : '';
+    const dot    = n > 0 ? ' ●' : '';
+    return `<button class="sum-tab ${active}" onclick="switchSummaryTest('${t.id}')">${t.label}${dot}</button>`;
+  }).join('');
+}
+
+function switchSummaryTest(tid) {
+  summaryTest = tid;
+  renderSummaryTabs();
+  renderSummary();
+}
+
 function renderSummary() {
-  const content = document.getElementById('summary-content');
-  let html = '';
+  const tid = summaryTest;
+  const t   = testInfo(tid);
+  let html  = '';
 
   ['6A','6B','6C'].forEach(cls => {
     SUBJECTS.forEach(subj => {
-      const paperMarks = marks[cls][subj.id];
-      const total = paperMarks.reduce((a,p) => a + p.filter(v=>v!=='').length, 0);
+      const pm    = marks[tid][cls][subj.id];
+      const total = pm.reduce((a, p) => a + p.filter(v => v !== '').length, 0);
       if (total === 0) return;
-
       const students = STUDENTS[cls];
       html += `
         <div class="summary-card">
           <div class="summary-card-header">
             ${subj.icon} ${cls} — ${subj.label}
-            <span class="badge badge-blue" style="margin-left:auto">${total} entries</span>
+            <span class="badge ${t.badgeClass}" style="margin-left:auto">${total} entries</span>
           </div>
           <div style="overflow-x:auto">
             <table class="summary-table">
               <thead><tr>
-                <th>#</th>
-                <th>Name</th>
-                ${subj.papers.map(p=>`<th>${p.name}<br><span style="font-weight:400">(/${p.max})</span></th>`).join('')}
+                <th>#</th><th>Name</th>
+                ${subj.papers.map(p => `<th>${p.name}<br><span style="font-weight:400">(/${p.max})</span></th>`).join('')}
               </tr></thead>
               <tbody>
                 ${students.map((name, si) => `
                   <tr>
-                    <td>${si+1}</td>
+                    <td>${si + 1}</td>
                     <td class="summary-name">${name}</td>
-                    ${subj.papers.map((_,pi) => {
-                      const v = marks[cls][subj.id][pi][si];
+                    ${subj.papers.map((_, pi) => {
+                      const v = marks[tid][cls][subj.id][pi][si];
                       return `<td>${v !== '' ? v : '<span style="color:var(--muted)">—</span>'}</td>`;
                     }).join('')}
                   </tr>`).join('')}
@@ -862,63 +880,61 @@ function renderSummary() {
     });
   });
 
-  if (!html) html = '<div style="text-align:center;padding:40px;color:var(--muted);">No marks entered yet.<br>Go back and start entering marks.</div>';
-  content.innerHTML = html;
+  document.getElementById('summary-content').innerHTML = html ||
+    `<div style="text-align:center;padding:40px;color:var(--muted);">No marks entered for ${t.label} yet.</div>`;
 }
 
 // ===================== EXCEL EXPORT =====================
 function exportExcel() {
   const wb = XLSX.utils.book_new();
 
-  ['6A','6B','6C'].forEach(cls => {
-    SUBJECTS.forEach(subj => {
-      const students = STUDENTS[cls];
-      const sheetName = cls + ' ' + subj.id;
+  TESTS.forEach(t => {
+    ['6A','6B','6C'].forEach(cls => {
+      SUBJECTS.forEach(subj => {
+        const students  = STUDENTS[cls];
+        // Sheet names max 31 chars
+        const sheetName = `${t.label} ${cls} ${subj.id}`.substring(0, 31);
 
-      const headers = ['No.', 'Student Name', ...subj.papers.map(p => p.name + ' (/' + p.max + ')')];
-      const rows = [headers];
+        const headers = ['No.', 'Student Name', ...subj.papers.map(p => `${p.name} (/${p.max})`)];
+        const maxRow  = ['', 'MAX MARKS', ...subj.papers.map(p => p.max)];
+        const rows    = [headers, maxRow];
 
-      students.forEach((name, si) => {
-        const row = [si + 1, name];
-        subj.papers.forEach((_, pi) => {
-          const v = marks[cls][subj.id][pi][si];
-          row.push(v !== '' ? parseFloat(v) : '');
+        students.forEach((name, si) => {
+          const row = [si + 1, name];
+          subj.papers.forEach((_, pi) => {
+            const v = marks[t.id][cls][subj.id][pi][si];
+            row.push(v !== '' ? parseFloat(v) : '');
+          });
+          rows.push(row);
         });
-        rows.push(row);
-      });
 
-      const maxRow = ['', 'MAX MARKS', ...subj.papers.map(p => p.max)];
-      rows.splice(1, 0, maxRow);
-
-      const ws = XLSX.utils.aoa_to_sheet(rows);
-      ws['!cols'] = [
-        {wch: 4},
-        {wch: 44},
-        ...subj.papers.map(() => ({wch: 14}))
-      ];
-
-      XLSX.utils.book_append_sheet(wb, ws, sheetName);
-    });
-  });
-
-  const overviewRows = [['Class', 'Subject', 'Paper', 'Students With Marks', 'Total Students']];
-  ['6A','6B','6C'].forEach(cls => {
-    SUBJECTS.forEach(subj => {
-      subj.papers.forEach((paper, pi) => {
-        const filled = marks[cls][subj.id][pi].filter(v => v !== '').length;
-        overviewRows.push([cls, subj.label, paper.name, filled, STUDENTS[cls].length]);
+        const ws = XLSX.utils.aoa_to_sheet(rows);
+        ws['!cols'] = [{ wch: 4 }, { wch: 44 }, ...subj.papers.map(() => ({ wch: 14 }))];
+        XLSX.utils.book_append_sheet(wb, ws, sheetName);
       });
     });
   });
-  const wsOverview = XLSX.utils.aoa_to_sheet(overviewRows);
-  wsOverview['!cols'] = [{wch:8},{wch:18},{wch:12},{wch:20},{wch:16}];
-  XLSX.utils.book_append_sheet(wb, wsOverview, 'Overview');
+
+  // Overview sheet
+  const ovRows = [['Test', 'Class', 'Subject', 'Paper', 'Entries', 'Total Students']];
+  TESTS.forEach(t => {
+    ['6A','6B','6C'].forEach(cls => {
+      SUBJECTS.forEach(subj => {
+        subj.papers.forEach((paper, pi) => {
+          const filled = marks[t.id][cls][subj.id][pi].filter(v => v !== '').length;
+          ovRows.push([t.label, cls, subj.label, paper.name, filled, STUDENTS[cls].length]);
+        });
+      });
+    });
+  });
+  const wsOv = XLSX.utils.aoa_to_sheet(ovRows);
+  wsOv['!cols'] = [{ wch: 8 }, { wch: 7 }, { wch: 18 }, { wch: 12 }, { wch: 10 }, { wch: 16 }];
+  XLSX.utils.book_append_sheet(wb, wsOv, 'Overview');
 
   XLSX.utils.book_set_props(wb, { Title: 'Year 6 Marks', Author: 'SR Perpindahan Kampong Lambak Kanan' });
-
-  const date = new Date();
-  const stamp = date.getFullYear() + ('0'+(date.getMonth()+1)).slice(-2) + ('0'+date.getDate()).slice(-2);
-  XLSX.writeFile(wb, 'Year6_Marks_' + stamp + '.xlsx');
+  const d = new Date();
+  const stamp = d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2);
+  XLSX.writeFile(wb, `Year6_Marks_${stamp}.xlsx`);
   showToast('Excel file downloaded!');
 }
 
@@ -931,7 +947,7 @@ function showToast(msg) {
 }
 
 // ===================== INIT =====================
-renderClassPage();
+renderTestPage();
 </script>
 
 </body>
