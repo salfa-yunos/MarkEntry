@@ -605,15 +605,31 @@ async function saveMarks() {
   saveBtn.innerHTML = '<span class="spinner"></span>Saving…';
 
   let ok=0, fail=0;
-  for(const e of entries) {
-    try {
-      const res = await fetch(POWER_AUTOMATE_URL, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ class: classNames[cls], test, subject: subj, ...e })
-      });
-      res.ok ? ok++ : fail++;
-    } catch { fail++; }
+  const today = new Date().toLocaleDateString('en-GB');
+  for(let i=0; i<sList.length; i++) {
+    const row = mStore[i];
+    if(!row) continue;
+    for(let pi=0; pi<subDef.papers.length; pi++) {
+      const paper = subDef.papers[pi];
+      const markVal = row[pi];
+      if(markVal === '' || markVal == null || markVal === undefined) continue;
+      try {
+        const res = await fetch(POWER_AUTOMATE_URL, {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            date: today,
+            test: test,
+            class: classNames[cls],
+            subject: subj,
+            studentName: sList[i],
+            paper: paper.label,
+            mark: parseFloat(markVal)
+          })
+        });
+        res.ok ? ok++ : fail++;
+      } catch { fail++; }
+    }
   }
 
   saveBtn.disabled = false;
