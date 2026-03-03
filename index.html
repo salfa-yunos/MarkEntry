@@ -3,259 +3,774 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Year 6 Mark Entry — SR Perpindahan Kampong Lambak Kanan</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
+<title>Year 6 Mark Entry</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0d1117;
-  --surface:#161b22;
-  --surface2:#21262d;
-  --border:#30363d;
-  --accent:#3b82f6;
-  --accent2:#60a5fa;
-  --accent-glow:rgba(59,130,246,.15);
-  --text:#e6edf3;
-  --muted:#8b949e;
-  --success:#3fb950;
-  --warning:#d29922;
-  --danger:#f85149;
-  --radius:12px;
-  --radius-sm:8px;
+  --bg:#0d1117;--surface:#161b22;--surface2:#21262d;--surface3:#2d333b;
+  --border:#30363d;--border2:#444c56;
+  --accent:#3b82f6;--accent2:#60a5fa;--accent-glow:rgba(59,130,246,.18);
+  --text:#e6edf3;--muted:#8b949e;--muted2:#6e7681;
+  --success:#3fb950;--warning:#d29922;--danger:#f85149;--info:#58a6ff;
+  --radius:12px;--radius-sm:8px;--radius-xs:6px;
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+button{font-family:'Sora',sans-serif;cursor:pointer}
+input{font-family:'Sora',sans-serif}
 
-body{
-  font-family:'Sora',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-}
+/* ─── HEADER ─── */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:13px 16px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:200}
+.hdr-icon{width:34px;height:34px;background:linear-gradient(135deg,#3b82f6,#7c3aed);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.hdr-text{flex:1;min-width:0}
+.hdr-title{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.hdr-actions{display:flex;gap:6px;flex-shrink:0}
+.hdr-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:var(--radius-xs);font-size:12px;font-weight:600;transition:border-color .15s}
+.hdr-btn:hover{border-color:var(--accent)}
+.hdr-btn:disabled{opacity:.3;cursor:not-allowed}
 
-/* HEADER */
-.header{
-  background:var(--surface);
-  border-bottom:1px solid var(--border);
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.header-icon{
-  width:36px;height:36px;
-  background:linear-gradient(135deg,var(--accent),#7c3aed);
-  border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-}
-.header-title{font-size:14px;font-weight:600}
-.header-sub{font-size:11px;color:var(--muted)}
-.header-back{
-  margin-left:auto;
-  background:var(--surface2);
-  border:1px solid var(--border);
-  color:var(--text);
-  padding:7px 14px;
-  border-radius:var(--radius-sm);
-  cursor:pointer;
-}
-.header-back:disabled{opacity:.3}
-
-/* LAYOUT */
-.main{max-width:600px;margin:0 auto;padding:16px 16px 90px}
-.page{display:none}
+/* ─── LAYOUT ─── */
+.main{max-width:640px;margin:0 auto;padding:16px 14px 100px}
+.page{display:none;animation:fadeIn .2s ease}
 .page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin:0 0 10px}
+h2{font-size:17px;font-weight:700;margin-bottom:14px}
 
-/* BUTTONS */
-.btn{
-  width:100%;
-  padding:14px;
-  border-radius:var(--radius);
-  font-weight:600;
-  border:none;
-  cursor:pointer;
+/* ─── CARDS ─── */
+.cards-grid{display:flex;flex-direction:column;gap:8px}
+.card-btn{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px;color:var(--text);font-size:14px;font-weight:600;width:100%;text-align:left;transition:border-color .15s,background .15s}
+.card-btn:hover{border-color:var(--accent);background:var(--surface2)}
+.card-btn:active{transform:scale(.99)}
+.card-icon{width:38px;height:38px;border-radius:var(--radius-xs);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.card-sub{font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-bottom:14px;flex-wrap:wrap}
+.breadcrumb span{color:var(--muted2)}
+
+/* ─── MARK TABLE ─── */
+.mark-table{width:100%;border-collapse:collapse}
+.mark-table th{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:8px 6px;border-bottom:2px solid var(--border);text-align:center}
+.mark-table th.left{text-align:left}
+.mark-table td{padding:6px 4px;border-bottom:1px solid var(--border);vertical-align:middle}
+.mark-table tr:last-child td{border-bottom:none}
+.snum{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;width:24px;text-align:center}
+.sname{font-size:12px;line-height:1.4;padding-left:4px}
+.mark-cell{text-align:center;position:relative}
+.mark-input{
+  width:60px;padding:6px 4px;text-align:center;
+  background:var(--bg);color:var(--text);
+  border:1.5px solid var(--border);border-radius:var(--radius-xs);
+  font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;
+  transition:border-color .15s;-moz-appearance:textfield;
 }
+.mark-input::-webkit-outer-spin-button,.mark-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.mark-input:focus{outline:none;border-color:var(--accent)}
+.mark-input.filled{border-color:var(--success)}
+.mark-input.over{border-color:var(--danger)}
+.total-cell{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;text-align:center;min-width:44px}
+.grade-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:700;font-family:'JetBrains Mono',monospace}
+.g-A{background:rgba(63,185,80,.15);color:#3fb950}
+.g-B{background:rgba(88,166,255,.15);color:#58a6ff}
+.g-C{background:rgba(210,153,34,.15);color:#d29922}
+.g-D{background:rgba(248,81,73,.15);color:#f85149}
+.g-E{background:rgba(139,148,158,.15);color:#8b949e}
+.paper-max{font-size:10px;color:var(--muted);display:block}
+
+/* ─── FOOTER ACTIONS ─── */
+.footer-bar{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;z-index:150}
+.footer-inner{width:100%;max-width:640px;background:var(--surface);border-top:1px solid var(--border);padding:10px 14px;display:flex;gap:8px}
+.btn{flex:1;padding:12px;border-radius:var(--radius);font-weight:700;border:none;font-size:13px;transition:opacity .15s,transform .1s}
+.btn:active{transform:scale(.98)}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
 .btn-success{background:var(--success);color:#fff}
+.btn-danger{background:rgba(248,81,73,.15);color:var(--danger);border:1px solid rgba(248,81,73,.3)}
+.btn-info{background:rgba(88,166,255,.12);color:var(--info);border:1px solid rgba(88,166,255,.25)}
+.btn:disabled{opacity:.35;cursor:not-allowed}
 
-/* CARDS */
-.cards-grid{display:flex;flex-direction:column;gap:10px}
-.card-btn{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:16px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  cursor:pointer;
-}
-.card-btn:hover{border-color:var(--accent)}
-.card-icon{
-  width:40px;height:40px;
-  border-radius:var(--radius-sm);
-  display:flex;align-items:center;justify-content:center;
-}
-
-/* MARK ENTRY */
-.student-row{
-  display:flex;
-  align-items:center;
-  padding:10px;
-  border-bottom:1px solid var(--border);
-  gap:10px;
-}
-.student-name{flex:1;font-size:13px}
-.mark-input{
-  width:64px;
-  padding:6px;
-  text-align:center;
-  background:var(--bg);
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:var(--radius-sm);
-  font-family:'JetBrains Mono',monospace;
-}
-.mark-input.over{border-color:var(--danger)}
-.mark-input.filled{border-color:var(--success)}
-
-.footer-actions{
-  position:fixed;
-  bottom:0;left:0;right:0;
-  max-width:600px;
-  margin:0 auto;
-  display:flex;
-  gap:10px;
-  background:var(--surface);
-  padding:12px;
-  border-top:1px solid var(--border);
-}
-
-.toast{
-  position:fixed;
-  bottom:90px;
-  left:50%;
-  transform:translateX(-50%);
-  background:var(--success);
-  color:#fff;
-  padding:10px 20px;
-  border-radius:20px;
-  opacity:0;
-  transition:.3s;
-}
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:88px;left:50%;transform:translateX(-50%);background:var(--success);color:#fff;padding:9px 18px;border-radius:20px;font-size:12px;font-weight:700;opacity:0;transition:opacity .25s;pointer-events:none;white-space:nowrap;z-index:999}
 .toast.show{opacity:1}
+.toast.err{background:var(--danger)}
+.toast.warn{background:var(--warning)}
+
+/* ─── MODAL ─── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius) var(--radius) 0 0;width:100%;max-width:640px;padding:20px 16px;max-height:80vh;overflow-y:auto}
+.modal h3{font-size:15px;font-weight:700;margin-bottom:14px}
+.modal-input{width:100%;padding:10px 12px;background:var(--bg);color:var(--text);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;margin-bottom:10px;transition:border-color .15s}
+.modal-input:focus{outline:none;border-color:var(--accent)}
+.modal-actions{display:flex;gap:8px;margin-top:4px}
+.modal-btn{flex:1;padding:10px;border-radius:var(--radius-sm);font-weight:700;border:none;font-size:13px}
+.modal-btn-primary{background:var(--accent);color:#fff}
+.modal-btn-secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+
+/* ─── STUDENT LIST EDITOR ─── */
+.student-edit-row{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border)}
+.student-edit-row:last-child{border-bottom:none}
+.student-edit-name{flex:1;font-size:12px}
+.del-btn{background:none;border:none;color:var(--danger);font-size:16px;padding:2px 6px;border-radius:4px}
+.del-btn:hover{background:rgba(248,81,73,.1)}
+
+/* ─── PRINT SUMMARY ─── */
+.summary-table{width:100%;border-collapse:collapse;font-size:12px}
+.summary-table th{padding:8px 6px;background:var(--surface2);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border:1px solid var(--border)}
+.summary-table td{padding:7px 6px;border:1px solid var(--border);vertical-align:middle}
+.summary-table td.right{text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600}
+
+.toolbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tool-btn{padding:7px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;border:1px solid var(--border);background:var(--surface2);color:var(--text);transition:border-color .15s}
+.tool-btn:hover{border-color:var(--accent)}
+.tool-btn.active{border-color:var(--accent);color:var(--accent2)}
+
+/* ─── PRINT STYLES ─── */
+@media print{
+  .header,.footer-bar,.toolbar,.no-print{display:none!important}
+  body{background:#fff;color:#000}
+  .print-area{display:block!important}
+  .summary-table th{background:#eee;color:#000}
+  .summary-table td,.summary-table th{border:1px solid #ccc}
+  .g-A,.g-B,.g-C,.g-D,.g-E{background:none;border:1px solid #999}
+}
+
+.spinner{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:5px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.chevron{color:var(--muted);font-size:18px;margin-left:auto}
+
+.class-badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;margin-left:8px}
+.c6a{background:rgba(59,130,246,.15);color:#60a5fa}
+.c6b{background:rgba(124,58,237,.15);color:#a78bfa}
+.c6c{background:rgba(63,185,80,.15);color:#3fb950}
 </style>
 </head>
-
 <body>
 
+<!-- HEADER -->
 <div class="header">
-  <div class="header-icon">📝</div>
-  <div>
-    <div class="header-title">Year 6 Mark Entry</div>
-    <div class="header-sub">SR Perpindahan Kampong Lambak Kanan</div>
+  <div class="hdr-icon">📝</div>
+  <div class="hdr-text">
+    <div class="hdr-title" id="hdr-school">SR Perpindahan Kampong Lambak Kanan</div>
+    <div class="hdr-sub">Year 6 Mark Entry System</div>
   </div>
-  <button class="header-back" id="backBtn" onclick="goBack()" disabled>← Back</button>
+  <div class="hdr-actions">
+    <button class="hdr-btn" onclick="openEditSchool()">✏️</button>
+    <button class="hdr-btn" id="backBtn" onclick="goBack()" disabled>← Back</button>
+  </div>
 </div>
 
 <div class="main">
 
-<div class="page active" id="page-test">
-  <h2>Select Test</h2>
+<!-- ═══ PAGE: SELECT CLASS ═══ -->
+<div class="page active" id="page-class">
+  <h2>Select Class</h2>
   <div class="cards-grid">
-    <button class="card-btn" onclick="selectTest('T1')"><div class="card-icon">🔵</div>Test 1</button>
-    <button class="card-btn" onclick="selectTest('T2')"><div class="card-icon">🟣</div>Test 2</button>
-    <button class="card-btn" onclick="selectTest('T3')"><div class="card-icon">🟡</div>Test 3</button>
-    <button class="card-btn" onclick="selectTest('T4')"><div class="card-icon">🔴</div>Test 4</button>
+    <button class="card-btn" onclick="selectClass('6A')">
+      <div class="card-icon" style="background:rgba(59,130,246,.12)">🏫</div>
+      <div>Class 6A <span class="class-badge c6a">17 students</span>
+      <div class="card-sub">Abdul Ammar Mustaqim · Nur Rizqah Humaira · +15 more</div></div>
+      <div class="chevron">›</div>
+    </button>
+    <button class="card-btn" onclick="selectClass('6B')">
+      <div class="card-icon" style="background:rgba(124,58,237,.12)">🏫</div>
+      <div>Class 6B <span class="class-badge c6b">19 students</span>
+      <div class="card-sub">Awangku Wan Mohammad · Sarah Sofea · +17 more</div></div>
+      <div class="chevron">›</div>
+    </button>
+    <button class="card-btn" onclick="selectClass('6C')">
+      <div class="card-icon" style="background:rgba(63,185,80,.12)">🏫</div>
+      <div>Class 6C <span class="class-badge c6c">19 students</span>
+      <div class="card-sub">Abdul Afi · Nurul Mushahirah · +17 more</div></div>
+      <div class="chevron">›</div>
+    </button>
   </div>
 </div>
 
+<!-- ═══ PAGE: SELECT TEST ═══ -->
+<div class="page" id="page-test">
+  <div class="breadcrumb"><span id="bc-class"></span></div>
+  <h2>Select Test</h2>
+  <div class="cards-grid">
+    <button class="card-btn" onclick="selectTest('Test 1')">
+      <div class="card-icon" style="background:rgba(59,130,246,.12)">①</div>Test 1<div class="chevron">›</div>
+    </button>
+    <button class="card-btn" onclick="selectTest('Test 2')">
+      <div class="card-icon" style="background:rgba(124,58,237,.12)">②</div>Test 2<div class="chevron">›</div>
+    </button>
+    <button class="card-btn" onclick="selectTest('Test 3')">
+      <div class="card-icon" style="background:rgba(210,153,34,.12)">③</div>Test 3<div class="chevron">›</div>
+    </button>
+    <button class="card-btn" onclick="selectTest('Test 4')">
+      <div class="card-icon" style="background:rgba(248,81,73,.12)">④</div>Test 4<div class="chevron">›</div>
+    </button>
+  </div>
+</div>
+
+<!-- ═══ PAGE: SELECT SUBJECT ═══ -->
+<div class="page" id="page-subject">
+  <div class="breadcrumb"><span id="bc-test"></span></div>
+  <h2>Select Subject</h2>
+  <div class="cards-grid" id="subject-cards"></div>
+</div>
+
+<!-- ═══ PAGE: MARK ENTRY ═══ -->
 <div class="page" id="page-marks">
-  <h2 id="marks-title"></h2>
+  <div class="breadcrumb" id="bc-marks"></div>
+  <div class="toolbar no-print">
+    <button class="tool-btn" onclick="openManageStudents()">👥 Manage Students</button>
+    <button class="tool-btn" onclick="openEditClass()">✏️ Edit Class Name</button>
+    <button class="tool-btn" onclick="printSummary()">🖨️ Print / PDF</button>
+  </div>
   <div id="marks-area"></div>
 </div>
 
+<!-- ═══ PAGE: SUMMARY ═══ -->
+<div class="page" id="page-summary">
+  <div class="breadcrumb" id="bc-summary"></div>
+  <div class="toolbar no-print">
+    <button class="tool-btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  </div>
+  <div id="summary-area" class="print-area"></div>
 </div>
 
-<div class="footer-actions" id="footer" style="display:none">
-  <button class="btn btn-secondary" onclick="goBack()">← Back</button>
-  <button class="btn btn-primary" onclick="saveMarks()">Save</button>
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="footer-bar" id="footer" style="display:none">
+  <div class="footer-inner" id="footer-inner"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
+<!-- ═══ MODALS ═══ -->
+<!-- Edit school -->
+<div class="modal-overlay" id="modal-school" style="display:none" onclick="closeModal('modal-school')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3>✏️ Edit School Name</h3>
+    <input class="modal-input" id="input-school" type="text" placeholder="School name">
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="closeModal('modal-school')">Cancel</button>
+      <button class="modal-btn modal-btn-primary" onclick="saveSchoolName()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit class name -->
+<div class="modal-overlay" id="modal-class" style="display:none" onclick="closeModal('modal-class')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3>✏️ Edit Class Name</h3>
+    <input class="modal-input" id="input-class" type="text" placeholder="Class name">
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="closeModal('modal-class')">Cancel</button>
+      <button class="modal-btn modal-btn-primary" onclick="saveClassName()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Manage students -->
+<div class="modal-overlay" id="modal-students" style="display:none" onclick="closeModal('modal-students')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <h3>👥 Manage Students — <span id="modal-class-label"></span></h3>
+    <div id="student-list-editor"></div>
+    <div style="margin-top:12px;border-top:1px solid var(--border);padding-top:12px">
+      <div class="section-title">Add Student</div>
+      <input class="modal-input" id="input-new-student" type="text" placeholder="Full name">
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-secondary" onclick="closeModal('modal-students')">Done</button>
+        <button class="modal-btn modal-btn-primary" onclick="addStudent()">+ Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-const STUDENTS=[
- 'Abdul Ammar Mustaqim Bin Mohammad Sumerdi',
- 'Nur Rizqah Humaira Binti Johari'
-];
+/* ═══════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════ */
+const POWER_AUTOMATE_URL = "https://default055b48fa571c47108e87b79ff84ea4.86.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/3e9648279ec54e25a6de1f5782074e64/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=m0duXkSoFLfBbFpoRJaNoCyKd6X39KI1OiDYFK2k-D4";
 
-const POWER_AUTOMATE_URL="https://default055b48fa571c47108e87b79ff84ea4.86.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/3e9648279ec54e25a6de1f5782074e64/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=m0duXkSoFLfBbFpoRJaNoCyKd6X39KI1OiDYFK2k-D4";
+let schoolName = "SR Perpindahan Kampong Lambak Kanan";
 
-let pageStack=['test'];
-let currentTest=null;
-let marks={};
+let classNames = { '6A':'6A', '6B':'6B', '6C':'6C' };
 
-function showPage(p){
-  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  document.getElementById('footer').style.display=p==='marks'?'flex':'none';
-  document.getElementById('backBtn').disabled=pageStack.length<=1;
+let students = {
+  '6A': [
+    'Abdul Ammar Mustaqim Bin Mohammad Sumerdi',
+    'Mohammad Aliff Arshraff @ Adrian Safrin Bin Abdullah',
+    'Muhammad Al - Irfan Billah Bin Muhammad Al - Muhtadee Billah',
+    "Muhammad 'Aqil Warith Bin Aimi@Muhammad Arfa",
+    'Muhammad Muqri Kasyfi Bin Tasyrif',
+    'Muhammad Muzaffar Azka Bin Abu Bakar Sidek',
+    'Muhammad Qawwiyun Harith Fardius Bin Abdullah',
+    'Muhammad Raif Anaqie Bin Mohammad Anwar',
+    'Alya Bazielah Binti Seruddin @Hamiezah',
+    'Niur Afifah Firzanah Binti Mohammad Fadilah',
+    'Norqaleesya Damia Sara Binti Rahimmi',
+    'Nur Afrina Rania Binti Rafian',
+    'Nur Aqillah Rahimah Binti Mohammad Fadillah',
+    'Nur Ardania Ain Binti Mohammed Mohini',
+    'Nur Jumyanah Binti Mohiddin',
+    'Nurliyana Qaisara Binti Lutfi',
+    'Syahira Musfirah Binti Muhammad Morsidi'
+  ],
+  '6B': [
+    'Awangku Wan Mohammad Farizz Naufal Bin Pengiran Abdul Muizz Nawawi',
+    'Mohammad Azhaar Izam Iman Bin Adirahiman Shah',
+    'Mohammad Riezman Qusyairi Bin Noor Azman',
+    'Muhammad Adam Asyraf Bin Muhammad Rusyduddin',
+    'Muhammad Ahza Wafri Bin Mahamad Miadi@Muhd Jazli',
+    'Muhammad Faiq Zakwan Bin Bakri',
+    'Muhammad Rizzal Fikir Bin Abdullah',
+    'Muhammad Shah Rayyan Hibatullah',
+    'Muhd Ali Aqil Akmal Bin Abdullah',
+    'Zafrul Izz Nazhan Bin Haji Zamri',
+    'Alya Darwisyah Batrisyia Binti Muhammad Nazmi',
+    'Nur Aina Farhanah Binti Khairul',
+    'Nur Amirah Zafirah Binti Awang Ahmad Syihan',
+    'Nur Qalesya Az - Zahra Binti Nur Azieman',
+    'Nurhalimatul Hafizah Binti Awang Haji Abdul Rahman',
+    'Nurul Maisarah Humairah Binti Awg Mohd Jair',
+    'Raisha Qaisarah Binti Sujairi',
+    'Sarah Sofea Binti Rusli',
+    'Siti Nurfarwizah Humaira @ Nurzahrah Binti Ahmad Fadzilah'
+  ],
+  '6C': [
+    "Abdul 'Afi Bin Abdullah",
+    'Awangku Mohammad Fahmi Muttaqin Bin Pengiran Abdul Rahman',
+    'Ahmad Amirullah Bin Mohammad Saiful Rizal',
+    'Mohammad Ahmad Mustakiim Bin Mohd Nor Azmi',
+    'Mohamad Aqil Zafran Bin Mohamad Fikri',
+    'Mohammad Azhad Shah Bin Nuhairi',
+    'Muhammad Khairul Azam Bin Awang Omar',
+    'Muhammad Zafran Nufail Bin Abdullah',
+    'Nur Al-Qhazieriza. Bin. Abdullah',
+    'Dayangku Nurdaimah Rizkiyah Binti Pengiran Mohammed Norfadillah',
+    'Dayangku Nur Hazeeqah @ Dayangku Aleaa Binti Pengiran Haji Asmalina',
+    'Dayangku Siti Syuhaidah Binti Pg Norzalani',
+    'Khayla Radella Md Ali Asrinizal',
+    'Nur Ain Adawiyah Binti Mohammad Aiman',
+    'Nurira Alya Nabilah Binti Mohammad Hairulerdie',
+    'Nurnikmattul Farwizah Binti Mohammad Yurizan',
+    'Nur Rizqah Humaira Binti Johari',
+    "'Uzma Zakirah Binti Saifulilham",
+    'Nurul Mushahirah Nadhirah Binti Mohqmad Radzuan'
+  ]
+};
+
+// Subject definitions: papers with max marks, scaled to 100%
+const SUBJECTS = {
+  'Bahasa Melayu': {
+    icon:'🇧🇳', color:'rgba(59,130,246,.12)',
+    papers: [
+      { label:'Paper 1', max:50, weight:50 },
+      { label:'Paper 2', max:100, weight:50 }
+    ]
+  },
+  'English': {
+    icon:'📖', color:'rgba(88,166,255,.12)',
+    papers: [
+      { label:'Paper 1', max:50, weight:50 },
+      { label:'Paper 2', max:50, weight:50 }
+    ]
+  },
+  'Science': {
+    icon:'🔬', color:'rgba(63,185,80,.12)',
+    papers: [
+      { label:'Paper 1', max:30, weight:30 },
+      { label:'Paper 2', max:70, weight:70 }
+    ]
+  },
+  'Mathematics': {
+    icon:'📐', color:'rgba(210,153,34,.12)',
+    papers: [
+      { label:'MCT', max:30, weight:15 },
+      { label:'Paper 1', max:90, weight:42.5 },
+      { label:'Paper 2', max:90, weight:42.5 }
+    ]
+  },
+  'MIB': {
+    icon:'☪️', color:'rgba(124,58,237,.12)',
+    papers: [
+      { label:'Paper 1', max:100, weight:100 }
+    ]
+  }
+};
+
+function getGrade(pct) {
+  if(pct >= 85) return 'A';
+  if(pct >= 70) return 'B';
+  if(pct >= 55) return 'C';
+  if(pct >= 40) return 'D';
+  return 'E';
 }
 
-function selectTest(t){
-  currentTest=t;
+// marks[class][test][subject][studentIndex][paperIndex]
+let marks = {};
+
+function getMarks(cls, test, subj) {
+  if(!marks[cls]) marks[cls]={};
+  if(!marks[cls][test]) marks[cls][test]={};
+  if(!marks[cls][test][subj]) marks[cls][test][subj]={};
+  return marks[cls][test][subj];
+}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+let pageStack = ['class'];
+let cur = { cls:null, test:null, subj:null };
+
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('backBtn').disabled = pageStack.length <= 1;
+  document.getElementById('footer').style.display = (p==='marks'||p==='summary') ? 'flex' : 'none';
+  if(p==='marks') renderFooterMarks();
+  if(p==='summary') renderFooterSummary();
+}
+
+function goBack() {
+  if(pageStack.length<=1) return;
+  pageStack.pop();
+  showPage(pageStack[pageStack.length-1]);
+}
+
+function selectClass(cls) {
+  cur.cls = cls;
+  pageStack.push('test');
+  document.getElementById('bc-class').textContent = `Class ${classNames[cls]}`;
+  showPage('test');
+}
+
+function selectTest(t) {
+  cur.test = t;
+  pageStack.push('subject');
+  document.getElementById('bc-test').textContent = `Class ${classNames[cur.cls]}  ›  ${t}`;
+  renderSubjectCards();
+  showPage('subject');
+}
+
+function selectSubject(subj) {
+  cur.subj = subj;
   pageStack.push('marks');
   renderMarks();
   showPage('marks');
 }
 
-function renderMarks(){
-  document.getElementById('marks-title').textContent=`${currentTest} – Science`;
-  document.getElementById('marks-area').innerHTML=
-    STUDENTS.map((s,i)=>`
-      <div class="student-row">
-        <span>${i+1}</span>
-        <span class="student-name">${s}</span>
-        <input class="mark-input" type="number" oninput="marks[${i}]=this.value">
-      </div>`).join('');
+/* ═══════════════════════════════════════════
+   SUBJECT CARDS
+═══════════════════════════════════════════ */
+function renderSubjectCards() {
+  const el = document.getElementById('subject-cards');
+  el.innerHTML = Object.entries(SUBJECTS).map(([name, s])=>`
+    <button class="card-btn" onclick="selectSubject('${name}')">
+      <div class="card-icon" style="background:${s.color}">${s.icon}</div>
+      <div>${name}
+        <div class="card-sub">${s.papers.map(p=>`${p.label} (${p.max})`).join(' · ')} → 100%</div>
+      </div>
+      <div class="chevron">›</div>
+    </button>`).join('');
 }
 
-function goBack(){
-  if(pageStack.length<=1)return;
-  pageStack.pop();
-  showPage(pageStack[pageStack.length-1]);
+/* ═══════════════════════════════════════════
+   MARK ENTRY
+═══════════════════════════════════════════ */
+function renderMarks() {
+  const { cls, test, subj } = cur;
+  const subDef = SUBJECTS[subj];
+  const sList = students[cls];
+  const mStore = getMarks(cls, test, subj);
+
+  document.getElementById('bc-marks').innerHTML =
+    `<span>Class ${classNames[cls]}</span> <span>›</span> <span>${test}</span> <span>›</span> <span>${subDef.icon} ${subj}</span>`;
+
+  const paperCols = subDef.papers.map(p=>
+    `<th class="mark-cell">${p.label}<span class="paper-max">/${p.max}</span></th>`
+  ).join('');
+
+  const rows = sList.map((name, i) => {
+    const paperInputs = subDef.papers.map((p, pi) => {
+      const val = (mStore[i] && mStore[i][pi] != null) ? mStore[i][pi] : '';
+      const cls2 = val !== '' ? (Number(val) > p.max ? ' over' : ' filled') : '';
+      return `<td class="mark-cell">
+        <input class="mark-input${cls2}" type="number" min="0" max="${p.max}"
+          id="mi_${i}_${pi}" value="${val}" placeholder="—"
+          oninput="onMark(${i},${pi},this)">
+      </td>`;
+    }).join('');
+
+    const { pct, display } = calcTotal(mStore[i], subDef.papers);
+    const grade = pct != null ? getGrade(pct) : '—';
+    const gradeHtml = pct != null ? `<span class="grade-badge g-${grade}">${grade}</span>` : '<span style="color:var(--muted)">—</span>';
+
+    return `<tr>
+      <td class="snum">${i+1}</td>
+      <td class="sname">${name}</td>
+      ${paperInputs}
+      <td class="total-cell" id="tot_${i}">${display}</td>
+      <td style="text-align:center" id="grade_${i}">${gradeHtml}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('marks-area').innerHTML = `
+    <table class="mark-table">
+      <thead><tr>
+        <th class="snum">#</th>
+        <th class="left">Name</th>
+        ${paperCols}
+        <th class="mark-cell">Total%</th>
+        <th class="mark-cell">Grade</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
 }
 
-async function saveMarks(){
-  for(let i=0;i<STUDENTS.length;i++){
-    if(marks[i]===''||marks[i]==null)continue;
-    await fetch(POWER_AUTOMATE_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        test:currentTest,
-        student:STUDENTS[i],
-        mark:marks[i]
-      })
-    });
+function calcTotal(row, papers) {
+  if(!row) return { pct:null, display:'—' };
+  let pct = 0; let hasAny = false;
+  for(let pi=0; pi<papers.length; pi++) {
+    const v = row[pi];
+    if(v == null || v === '') return { pct:null, display:'—' };
+    hasAny = true;
+    pct += (Number(v) / papers[pi].max) * papers[pi].weight;
   }
-  showToast('Saved successfully!');
+  if(!hasAny) return { pct:null, display:'—' };
+  return { pct, display: pct.toFixed(1)+'%' };
 }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
+function onMark(i, pi, el) {
+  const { cls, test, subj } = cur;
+  const mStore = getMarks(cls, test, subj);
+  const subDef = SUBJECTS[subj];
+  if(!mStore[i]) mStore[i] = {};
+  const val = el.value.trim();
+  mStore[i][pi] = val === '' ? null : Number(val);
+
+  const max = subDef.papers[pi].max;
+  el.classList.toggle('filled', val !== '' && Number(val) <= max);
+  el.classList.toggle('over', val !== '' && Number(val) > max);
+
+  // update total & grade
+  const { pct, display } = calcTotal(mStore[i], subDef.papers);
+  document.getElementById(`tot_${i}`).textContent = display;
+  const grade = pct != null ? getGrade(pct) : null;
+  document.getElementById(`grade_${i}`).innerHTML = grade
+    ? `<span class="grade-badge g-${grade}">${grade}</span>`
+    : '<span style="color:var(--muted)">—</span>';
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER BUTTONS
+═══════════════════════════════════════════ */
+function renderFooterMarks() {
+  document.getElementById('footer-inner').innerHTML = `
+    <button class="btn btn-secondary" onclick="goBack()">← Back</button>
+    <button class="btn btn-info" onclick="showSummary()">📊 Summary</button>
+    <button class="btn btn-primary" id="saveBtn" onclick="saveMarks()">💾 Save</button>`;
+}
+
+function renderFooterSummary() {
+  document.getElementById('footer-inner').innerHTML = `
+    <button class="btn btn-secondary" onclick="goBack()">← Back</button>
+    <button class="btn btn-primary" onclick="window.print()">🖨️ Print / PDF</button>`;
+}
+
+/* ═══════════════════════════════════════════
+   SAVE TO POWER AUTOMATE
+═══════════════════════════════════════════ */
+async function saveMarks() {
+  const { cls, test, subj } = cur;
+  const mStore = getMarks(cls, test, subj);
+  const sList = students[cls];
+  const subDef = SUBJECTS[subj];
+  const saveBtn = document.getElementById('saveBtn');
+
+  const entries = [];
+  for(let i=0; i<sList.length; i++) {
+    const row = mStore[i];
+    if(!row) continue;
+    const { pct } = calcTotal(row, subDef.papers);
+    if(pct == null) continue;
+    const paperData = {};
+    subDef.papers.forEach((p,pi) => { paperData[p.label] = row[pi]; });
+    entries.push({ student: sList[i], papers: paperData, total: parseFloat(pct.toFixed(2)), grade: getGrade(pct) });
+  }
+
+  if(!entries.length) { showToast('No complete marks to save.', 'warn'); return; }
+
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = '<span class="spinner"></span>Saving…';
+
+  let ok=0, fail=0;
+  for(const e of entries) {
+    try {
+      const res = await fetch(POWER_AUTOMATE_URL, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ class: classNames[cls], test, subject: subj, ...e })
+      });
+      res.ok ? ok++ : fail++;
+    } catch { fail++; }
+  }
+
+  saveBtn.disabled = false;
+  saveBtn.innerHTML = '💾 Save';
+
+  if(fail===0) showToast(`✓ ${ok} record${ok!==1?'s':''} saved!`);
+  else if(ok>0) showToast(`⚠ ${ok} saved, ${fail} failed`, 'warn');
+  else showToast('✗ Save failed. Check connection.', 'err');
+}
+
+/* ═══════════════════════════════════════════
+   SUMMARY / PRINT
+═══════════════════════════════════════════ */
+function showSummary() {
+  const { cls, test, subj } = cur;
+  const mStore = getMarks(cls, test, subj);
+  const sList = students[cls];
+  const subDef = SUBJECTS[subj];
+
+  document.getElementById('bc-summary').innerHTML =
+    `<span>Class ${classNames[cls]}</span> <span>›</span> <span>${test}</span> <span>›</span> <span>${subDef.icon} ${subj} — Summary</span>`;
+
+  const paperCols = subDef.papers.map(p=>`<th>${p.label}<br><span style="font-weight:400;color:var(--muted)">/${p.max}</span></th>`).join('');
+
+  const rows = sList.map((name, i) => {
+    const row = mStore[i] || {};
+    const { pct, display } = calcTotal(row, subDef.papers);
+    const grade = pct != null ? getGrade(pct) : '—';
+    const paperVals = subDef.papers.map((_,pi)=>`<td class="right">${row[pi]!=null?row[pi]:'—'}</td>`).join('');
+    const gradeHtml = pct!=null ? `<span class="grade-badge g-${grade}">${grade}</span>` : '—';
+    return `<tr>
+      <td style="text-align:center;color:var(--muted);font-family:'JetBrains Mono',monospace">${i+1}</td>
+      <td>${name}</td>
+      ${paperVals}
+      <td class="right">${display}</td>
+      <td style="text-align:center">${gradeHtml}</td>
+    </tr>`;
+  }).join('');
+
+  // grade distribution
+  let dist = {A:0,B:0,C:0,D:0,E:0};
+  sList.forEach((_,i)=>{ const {pct}=calcTotal(mStore[i]||{}, subDef.papers); if(pct!=null) dist[getGrade(pct)]++; });
+  const distHtml = Object.entries(dist).map(([g,n])=>
+    `<span class="grade-badge g-${g}" style="margin-right:6px">${g}: ${n}</span>`).join('');
+
+  document.getElementById('summary-area').innerHTML = `
+    <div style="margin-bottom:12px">
+      <div style="font-size:16px;font-weight:700">${schoolName}</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:2px">Class ${classNames[cls]} · ${test} · ${subj}</div>
+    </div>
+    <div style="margin-bottom:12px">${distHtml}</div>
+    <table class="summary-table">
+      <thead><tr>
+        <th style="width:30px">#</th>
+        <th style="text-align:left">Student Name</th>
+        ${paperCols}
+        <th>Total %</th>
+        <th>Grade</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+
+  pageStack.push('summary');
+  showPage('summary');
+}
+
+function printSummary() { showSummary(); }
+
+/* ═══════════════════════════════════════════
+   MODALS
+═══════════════════════════════════════════ */
+function openModal(id) { document.getElementById(id).style.display='flex'; }
+function closeModal(id) { document.getElementById(id).style.display='none'; }
+
+function openEditSchool() {
+  document.getElementById('input-school').value = schoolName;
+  openModal('modal-school');
+}
+function saveSchoolName() {
+  const v = document.getElementById('input-school').value.trim();
+  if(!v) return;
+  schoolName = v;
+  document.getElementById('hdr-school').textContent = v;
+  closeModal('modal-school');
+  showToast('School name updated');
+}
+
+function openEditClass() {
+  document.getElementById('input-class').value = classNames[cur.cls];
+  openModal('modal-class');
+}
+function saveClassName() {
+  const v = document.getElementById('input-class').value.trim();
+  if(!v) return;
+  classNames[cur.cls] = v;
+  renderMarks();
+  closeModal('modal-class');
+  showToast('Class name updated');
+}
+
+function openManageStudents() {
+  document.getElementById('modal-class-label').textContent = `Class ${classNames[cur.cls]}`;
+  renderStudentEditor();
+  openModal('modal-students');
+}
+
+function renderStudentEditor() {
+  const sList = students[cur.cls];
+  document.getElementById('student-list-editor').innerHTML = sList.map((name,i)=>`
+    <div class="student-edit-row">
+      <span class="student-edit-name">${i+1}. ${name}</span>
+      <button class="del-btn" onclick="removeStudent(${i})">🗑</button>
+    </div>`).join('');
+}
+
+function removeStudent(i) {
+  if(!confirm(`Remove "${students[cur.cls][i]}"?`)) return;
+  students[cur.cls].splice(i,1);
+  // also remove their marks across all tests/subjects
+  for(const t in marks[cur.cls]||{}) {
+    for(const s in marks[cur.cls][t]||{}) {
+      const mStore = marks[cur.cls][t][s];
+      const newStore = {};
+      let ni=0;
+      Object.keys(mStore).forEach(ki=>{
+        if(Number(ki)!==i) { newStore[ni]=mStore[ki]; ni++; }
+      });
+      marks[cur.cls][t][s] = newStore;
+    }
+  }
+  renderStudentEditor();
+  renderMarks();
+  showToast('Student removed');
+}
+
+function addStudent() {
+  const v = document.getElementById('input-new-student').value.trim();
+  if(!v) return;
+  students[cur.cls].push(v);
+  document.getElementById('input-new-student').value='';
+  renderStudentEditor();
+  renderMarks();
+  showToast('Student added');
+}
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+let toastTimer;
+function showToast(msg, type='ok') {
+  clearTimeout(toastTimer);
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type==='err'?' err':type==='warn'?' warn':'');
   t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
 }
 </script>
-
 </body>
 </html>
